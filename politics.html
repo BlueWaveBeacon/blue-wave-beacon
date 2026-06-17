@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blue Wave Beacon — Politics &amp; Democracy news, updated daily." />
+  <title>Politics &amp; Democracy — BLUE WAVE BEACON</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="alternate" type="application/rss+xml" title="BLUE WAVE BEACON RSS" href="feed.xml" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0d2247" />
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" id="site-title-link">
+    <img src="assets/logo.png" alt="Blue Wave Beacon logo" id="site-logo" />
+    <span id="site-title"><span>BLUE WAVE</span> BEACON</span>
+  </a>
+  <div id="site-tagline">Progressive News · Updated Daily</div>
+  <nav id="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donations.html">💙 Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS Feed</a>
+    <a href="archive.html">📅 Archive</a>
+    <a href="merch.html">🛍️ Merch</a>
+  </nav>
+</header>
+
+<div id="follow-bar">
+  <span>Follow Us</span>
+  <a href="https://bsky.app/profile/bluewavebeacon.bsky.social" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  <a href="https://mastodon.social/@bluewavebeacon" target="_blank" rel="noopener noreferrer">🐘 Mastodon</a>
+  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+</div>
+
+<main id="main-wrapper">
+
+  <nav id="category-nav">
+    <a href="index.html">All Stories</a>
+    <a href="politics.html" class="active">Politics &amp; Democracy</a>
+    <a href="climate.html">Climate &amp; Environment</a>
+    <a href="economy.html">Economy &amp; Labor</a>
+  </nav>
+
+  <div id="search-bar">
+    <input type="text" id="headline-search" placeholder="🔍 Search headlines..." />
+  </div>
+
+  <div id="columns" style="grid-template-columns: 1fr;">
+    <div class="column">
+      <div class="column-title">POLITICS &amp; DEMOCRACY</div>
+
+      <a href="https://talkingpointsmemo.com" target="_blank" rel="noopener noreferrer" class="news-link headline-big">
+        House Progressive Caucus Pushes Back on Defense Spending Increase
+        <span class="source">Talking Points Memo</span>
+      </a>
+      <a href="https://www.dailykos.com" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">
+        Voting Rights Groups Celebrate Federal Court Ruling Restoring Ballot Drop Boxes
+        <span class="source">Daily Kos</span>
+      </a>
+      <a href="https://www.rawstory.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Florida's Book Ban Law Struck Down by Appeals Court in 5-4 Decision
+        <span class="source">Raw Story</span>
+      </a>
+      <a href="https://www.rawstory.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Poll: Majority of Americans Support Stronger Labor Union Protections
+        <span class="source">Raw Story</span>
+      </a>
+      <a href="https://www.politicususa.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Democrats Unveil Comprehensive Plan to Lower Prescription Drug Costs
+        <span class="source">PoliticusUSA</span>
+      </a>
+      <a href="https://www.huffpost.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        State Attorneys General File Coalition Lawsuit Over EPA Rollbacks
+        <span class="source">HuffPost</span>
+      </a>
+      <a href="https://www.dailykos.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Senator Warren Introduces Bill to Cancel Medical Debt for Millions
+        <span class="source">Daily Kos</span>
+      </a>
+      <a href="https://talkingpointsmemo.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Congressional Hispanic Caucus Demands Action on Immigration Reform
+        <span class="source">Talking Points Memo</span>
+      </a>
+      <a href="https://www.commondreams.org" target="_blank" rel="noopener noreferrer" class="news-link">
+        Labor Movement Wins Major Victory as Amazon Warehouse Workers Unionize
+        <span class="source">Common Dreams</span>
+      </a>
+      <a href="https://truthout.org" target="_blank" rel="noopener noreferrer" class="news-link">
+        Activists Demand End to Mass Incarceration at Washington Rally
+        <span class="source">Truthout</span>
+      </a>
+      <a href="https://www.rawstory.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        GOP Gerrymandering Map Rejected by Federal Judge as Unconstitutional
+        <span class="source">Raw Story</span>
+      </a>
+      <a href="https://www.dailykos.com" target="_blank" rel="noopener noreferrer" class="news-link">
+        Youth Voter Turnout Hits Record High in Recent Primaries
+        <span class="source">Daily Kos</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="donations.html">Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS</a>
+    <a href="mailto:contact@bluewavebeacon.com">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="merch.html">Merch Store</a>
+    <a href="archive.html">Archive</a>
+  </div>
+  <div>&copy; 2026 BLUE WAVE BEACON &mdash; Independent progressive journalism aggregator.</div>
+</footer>
+
+<script>
+document.getElementById('headline-search').addEventListener('input', function (e) {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.news-link').forEach(function (link) {
+    const text = link.textContent.toLowerCase();
+    link.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
+  });
+});
+</script>
+</body>
+</html>

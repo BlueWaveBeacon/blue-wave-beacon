@@ -1,0 +1,37 @@
+﻿name: Daily News Update
+
+on:
+  schedule:
+    # Runs every day at 11:00 AM Eastern (16:00 UTC)
+    - cron: "0 16 * * *"
+  workflow_dispatch: # also allows manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run aggregator
+        run: python scripts/aggregate.py
+
+      - name: Commit & push updated HTML
+        run: |
+          git config user.name  "BlueWaveBot"
+          git config user.email "bot@bluewavebeacon.com"
+          git add index.html feed.xml
+          git diff --cached --quiet || git commit -m "chore: daily feed update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

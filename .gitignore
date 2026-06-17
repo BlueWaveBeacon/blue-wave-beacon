@@ -1,0 +1,14 @@
+# OS / editor cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local preview helper (PC-only, not needed on the live site)
+serve.ps1

@@ -1,0 +1,21 @@
+{
+  "name": "Blue Wave Beacon",
+  "short_name": "Beacon",
+  "description": "Progressive news aggregator updated daily.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0d2247",
+  "theme_color": "#0d2247",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

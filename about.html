@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — BLUE WAVE BEACON</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" id="site-title-link">
+    <img src="assets/logo.png" alt="Blue Wave Beacon logo" id="site-logo" />
+    <span id="site-title"><span>BLUE WAVE</span> BEACON</span>
+  </a>
+  <div id="site-tagline">Progressive News · Updated Daily</div>
+  <nav id="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donations.html">💙 Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS Feed</a>
+    <a href="archive.html">📅 Archive</a>
+    <a href="merch.html">🛍️ Merch</a>
+  </nav>
+</header>
+
+<div id="follow-bar">
+  <span>Follow Us</span>
+  <a href="https://bsky.app/profile/bluewavebeacon.bsky.social" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  <a href="https://mastodon.social/@bluewavebeacon" target="_blank" rel="noopener noreferrer">🐘 Mastodon</a>
+  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+</div>
+
+<div class="about-content">
+
+  <h2>What is BLUE WAVE BEACON?</h2>
+  <p>
+    BLUE WAVE BEACON is an independent, reader-supported news aggregator in the
+    tradition of classic link-driven news sites. Every day, our automated system
+    scans dozens of trusted progressive and independent outlets and surfaces the
+    most important stories — no algorithm pushing outrage, no corporate editorial
+    filter.
+  </p>
+
+  <h2>Our Sources</h2>
+  <p>
+    We aggregate from established, fact-based progressive journalism outlets including
+    <strong>The Guardian, HuffPost, Vox, Mother Jones, ProPublica, The Intercept,
+    Talking Points Memo, The Nation, Slate, Salon, Raw Story, Daily Kos,
+    Democracy Now, Common Dreams, Truthout, Grist,</strong> and
+    <strong>Inside Climate News</strong>, among others.
+  </p>
+  <p>
+    We do not create or editorialize original content — we link to the source.
+    All articles remain the property of their respective publishers.
+  </p>
+
+  <h2>Bluesky Integration</h2>
+  <p>
+    We pull trending topics and posts from
+    <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">Bluesky</a>,
+    the decentralized social network that has become a hub for progressive voices,
+    journalists, and activists. Posts are surfaced via Bluesky's public API.
+  </p>
+
+  <h2>How Often Is It Updated?</h2>
+  <p>
+    The site regenerates automatically every day at <strong>7:00 AM Eastern</strong>
+    via a scheduled GitHub Actions workflow. No human intervention required — fully
+    automated. You can also trigger a manual update any time from the GitHub
+    repository's Actions tab.
+  </p>
+
+  <h2>How to Set Up Your Own Copy</h2>
+  <ol style="margin-left:24px; line-height:2;">
+    <li>Fork the <a href="https://github.com/BlueWaveBeacon/blue-wave-beacon" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+    <li>Enable GitHub Pages (Settings → Pages → Deploy from <code>main</code> branch root)</li>
+    <li>Enable GitHub Actions (they are in <code>.github/workflows/update.yml</code>)</li>
+    <li>Run the aggregator once manually: <code>python scripts/aggregate.py</code></li>
+    <li>Update the donation links in <code>donations.html</code> with your accounts</li>
+    <li>Replace <code>YOUR_FORM_ID</code> in the newsletter form (use Formspree.io)</li>
+    <li>Optionally add a custom domain in GitHub Pages settings</li>
+  </ol>
+
+  <h2>Privacy</h2>
+  <p>
+    BLUE WAVE BEACON does not track visitors, sell data, or use invasive analytics.
+    The newsletter signup (if enabled) uses Formspree and is subject to their
+    <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">privacy policy</a>.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions, source suggestions, or corrections?
+    Email us at
+    <a href="mailto:contact@bluewavebeacon.com">contact@bluewavebeacon.com</a>
+    or open an issue on GitHub.
+  </p>
+
+  <h2>Support the Site</h2>
+  <p>
+    This site is free to use and will always remain so. If it's valuable to you,
+    please consider <a href="donations.html">making a donation</a> to keep it running.
+    Even a few dollars a month makes a real difference for an independent operation.
+  </p>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="donations.html">Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS</a>
+    <a href="mailto:contact@bluewavebeacon.com">Contact</a>
+    <a href="merch.html">Merch Store</a>
+    <a href="archive.html">Archive</a>
+  </div>
+  <div>&copy; 2025 BLUE WAVE BEACON</div>
+</footer>
+
+</body>
+</html>
