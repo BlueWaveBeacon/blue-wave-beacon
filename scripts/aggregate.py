@@ -494,8 +494,14 @@ def build_rss(items: list[dict], now: datetime) -> str:
 
 def main():
     now = datetime.now(timezone.utc)
-    timestamp = now.strftime("%B %d, %Y — %I:%M %p")
-    year = now.year
+    # Display the timestamp in US Eastern time (the label on the page says "ET")
+    try:
+        from zoneinfo import ZoneInfo
+        now_et = now.astimezone(ZoneInfo("America/New_York"))
+    except Exception:
+        now_et = now  # fallback to UTC if tz data unavailable
+    timestamp = now_et.strftime("%B %d, %Y — %I:%M %p")
+    year = now_et.year
 
     print("Fetching RSS feeds...")
     items = fetch_all_feeds()
