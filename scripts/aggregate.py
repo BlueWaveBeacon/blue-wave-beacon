@@ -31,6 +31,10 @@ SOURCES = [
     {"name": "The Guardian US", "url": "https://www.theguardian.com/us/rss",          "cat": "top"},
     {"name": "HuffPost",        "url": "https://www.huffpost.com/section/front-page/feed", "cat": "top"},
     {"name": "Vox",             "url": "https://www.vox.com/rss/index.xml",            "cat": "top"},
+    {"name": "MSNBC",           "url": "https://www.msnbc.com/feeds/latest",           "cat": "top"},
+    {"name": "CNN",             "url": "http://rss.cnn.com/rss/cnn_topstories.rss",    "cat": "top"},
+    {"name": "ABC News",        "url": "https://feeds.abcnews.com/abcnews/topstories", "cat": "top"},
+    {"name": "CBS News",        "url": "https://www.cbsnews.com/latest/rss/main",      "cat": "top"},
     # Politics
     {"name": "Talking Points Memo","url": "https://feeds.feedburner.com/talkingpointsmemo/main","cat": "politics"},
     {"name": "Daily Kos",       "url": "https://www.dailykos.com/stories/feed.rss",    "cat": "politics"},
