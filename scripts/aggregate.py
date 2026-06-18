@@ -564,10 +564,15 @@ def main():
 
     print("Done.")
 
+def fmt_date(d: str) -> str:
+    # Portable "Month D, YYYY" (avoid %-d / %#d which differ by platform)
+    dt = datetime.strptime(d, "%Y-%m-%d")
+    return f"{dt.strftime('%B')} {dt.day}, {dt.year}"
+
 def update_archive_index(archive_dir: Path):
     dates = sorted((p.stem for p in archive_dir.glob("*.html")), reverse=True)
     links = "\n  ".join(
-        f'<a href="archive/{d}.html">{datetime.strptime(d, "%Y-%m-%d").strftime("%B %-d, %Y")}</a>'
+        f'<a href="archive/{d}.html">{fmt_date(d)}</a>'
         for d in dates
     )
     archive_html = (ROOT / "archive.html").read_text(encoding="utf-8")
