@@ -38,5 +38,19 @@ jobs:
           git config user.name  "BlueWaveBot"
           git config user.email "bot@bluewavebeacon.com"
           git add index.html feed.xml sitemap.xml archive.html archive/
-          git diff --cached --quiet || git commit -m "chore: daily feed update $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: daily feed update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          # Push with rebase + retry to survive races with any concurrent commits
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase --autostash origin main && git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying in 5s..."
+            sleep 5
+          done
+          echo "All push attempts failed." >&2
+          exit 1
