@@ -2,8 +2,13 @@
 
 on:
   schedule:
-    # Runs every day at 11:00 AM Eastern (16:00 UTC)
-    - cron: "0 16 * * *"
+    # GitHub runs cron in UTC and does NOT observe daylight saving, so we list both:
+    #   15:17 UTC = 11:17 AM EDT (summer, Mar–Nov)
+    #   16:17 UTC = 11:17 AM EST (winter, Nov–Mar)
+    # Both fire year-round; the "off-season" one just runs ~an hour off and refreshes again (harmless).
+    # Minute :17 (not :00) is used because GitHub frequently delays/drops on-the-hour scheduled jobs.
+    - cron: "17 15 * * *"
+    - cron: "17 16 * * *"
   workflow_dispatch: # also allows manual trigger from GitHub UI
 
 permissions:
