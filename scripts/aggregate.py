@@ -125,57 +125,92 @@ def fetch_all_feeds() -> list[dict]:
 
 BSKY_API = "https://public.api.bsky.app/xrpc"
 
-def fetch_bluesky_trending() -> tuple[list[dict], list[str]]:
-    """Returns (posts, trending_tags)"""
-    tags = []
-    posts = []
+# Curated progressive voices on Bluesky. We pull their recent posts via the public
+# getAuthorFeed endpoint (the old searchPosts endpoint now returns 403 without auth).
+BSKY_ACCOUNTS = [
+    "rbreich.bsky.social",        # Robert Reich
+    "aoc.bsky.social",            # Alexandria Ocasio-Cortez
+    "gtconway.bsky.social",       # George Conway
+    "mehdirhasan.bsky.social",    # Mehdi Hasan
+    "danrather.bsky.social",      # Dan Rather
+    "wajahatali.bsky.social",     # Wajahat Ali
+    "rgay.bsky.social",           # Roxane Gay
+    "marcelias.bsky.social",      # Marc Elias (voting rights)
+    "protectdemocracy.bsky.social",
+    "crooksandliars.bsky.social",
+    "emptywheel.bsky.social",     # Marcy Wheeler
+    "propublica.org",             # ProPublica
+]
 
-    # Trending topics
+def fetch_bluesky_trending() -> tuple[list[dict], list[str]]:
+    """Returns (posts, trending_tags). Posts come from curated progressive accounts,
+    ranked by engagement; the old public search endpoint is no longer available."""
+    tags = []
+    candidates = []
+
+    # Trending topics (still public)
     try:
         r = requests.get(f"{BSKY_API}/app.bsky.unspecced.getTrendingTopics",
                          params={"limit": BLUESKY_TRENDING_COUNT}, timeout=10)
         if r.ok:
-            data = r.json()
-            topics = data.get("topics", [])
+            topics = r.json().get("topics", [])
             tags = [t.get("topic", "") for t in topics if t.get("topic")]
     except Exception as e:
         print(f"  [WARN] Bluesky trending: {e}", file=sys.stderr)
 
-    # Search for progressive/political posts using trending or fallback queries
-    queries = tags[:3] if tags else ["progressive", "politics", "democracy"]
-    for q in queries[:3]:
+    # Pull recent posts from each curated account, keep substantive original posts
+    for actor in BSKY_ACCOUNTS:
         try:
-            r = requests.get(f"{BSKY_API}/app.bsky.feed.searchPosts",
-                             params={"q": q, "limit": 3, "sort": "top"}, timeout=10)
-            if r.ok:
-                for post in r.json().get("posts", []):
-                    author  = post.get("author", {})
-                    record  = post.get("record", {})
-                    text    = clean(record.get("text", ""))
-                    handle  = author.get("handle", "")
-                    display = author.get("displayName", handle)
-                    uri     = post.get("uri", "")
-                    likes   = post.get("likeCount", 0)
-                    reposts = post.get("repostCount", 0)
-                    # Build bsky.app URL from AT URI
-                    if uri.startswith("at://"):
-                        parts = uri.replace("at://", "").split("/")
-                        bsky_url = f"https://bsky.app/profile/{parts[0]}/post/{parts[-1]}" if len(parts) >= 3 else "#"
-                    else:
-                        bsky_url = "#"
-                    if text:
-                        posts.append({
-                            "display": display,
-                            "handle": f"@{handle}",
-                            "text": text[:280],
-                            "url": bsky_url,
-                            "likes": likes,
-                            "reposts": reposts,
-                        })
+            r = requests.get(f"{BSKY_API}/app.bsky.feed.getAuthorFeed",
+                             params={"actor": actor, "limit": 8, "filter": "posts_no_replies"},
+                             timeout=10)
+            if not r.ok:
+                continue
+            for entry in r.json().get("feed", []):
+                # Skip reposts — we want the account's own words
+                if entry.get("reason"):
+                    continue
+                post   = entry.get("post", {})
+                author = post.get("author", {})
+                record = post.get("record", {})
+                text   = clean(record.get("text", ""))
+                # Skip very short posts and pure link/image drops
+                if len(text) < 60:
+                    continue
+                handle  = author.get("handle", "")
+                display = author.get("displayName", handle)
+                uri     = post.get("uri", "")
+                likes   = post.get("likeCount", 0)
+                reposts = post.get("repostCount", 0)
+                if uri.startswith("at://"):
+                    parts = uri.replace("at://", "").split("/")
+                    bsky_url = f"https://bsky.app/profile/{parts[0]}/post/{parts[-1]}" if len(parts) >= 3 else "#"
+                else:
+                    bsky_url = "#"
+                candidates.append({
+                    "display": display,
+                    "handle": f"@{handle}",
+                    "text": text[:300],
+                    "url": bsky_url,
+                    "likes": likes,
+                    "reposts": reposts,
+                })
         except Exception as e:
-            print(f"  [WARN] Bluesky search '{q}': {e}", file=sys.stderr)
+            print(f"  [WARN] Bluesky {actor}: {e}", file=sys.stderr)
 
-    return posts[:BLUESKY_POST_COUNT], tags[:BLUESKY_TRENDING_COUNT]
+    # Rank by engagement, but cap one post per author so it's not all one person
+    candidates.sort(key=lambda p: p["likes"], reverse=True)
+    posts = []
+    seen_authors = set()
+    for p in candidates:
+        if p["handle"] in seen_authors:
+            continue
+        seen_authors.add(p["handle"])
+        posts.append(p)
+        if len(posts) >= BLUESKY_POST_COUNT:
+            break
+
+    return posts, tags[:BLUESKY_TRENDING_COUNT]
 
 # ── HTML RENDERING ─────────────────────────────────────────────────────────────
 
@@ -212,6 +247,19 @@ def render_trend_tags(tags: list[str]) -> str:
     parts.append("</div>")
     return "\n".join(parts)
 
+# URL path segments that signal "soft"/lifestyle content we don't want as hard news.
+SOFT_URL_SEGMENTS = (
+    "/lifestyle", "/wellness", "/well/", "/food", "/recipes", "/music", "/culture",
+    "/books", "/games", "/game", "/sport", "/football", "/soccer", "/fashion",
+    "/travel", "/art-and-design", "/artanddesign", "/tv-and-radio", "/television",
+    "/film", "/movies", "/stage", "/relationships", "/beauty", "/style", "/celebrity",
+    "/entertainment", "/puzzles", "/crosswords", "/horoscope", "/global/", "/pets",
+)
+
+def is_soft(item: dict) -> bool:
+    url = (item.get("link") or "").lower()
+    return any(seg in url for seg in SOFT_URL_SEGMENTS)
+
 def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     """Returns (top_story_html, left_col_html, center_col_html, right_col_html)"""
     # Sort by category into buckets
@@ -221,10 +269,22 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     prog_items  = [i for i in items if i["cat"] in ("progressive", "climate")]
     other_items = [i for i in items if i["cat"] not in ("top","politics","investigation","opinion","progressive","climate","substack")]
 
-    # Top story — first item from top sources
+    # Keep hard news first within the top bucket; push soft/lifestyle items to the bottom.
+    hard_top = [i for i in top_items if not is_soft(i)]
+    soft_top = [i for i in top_items if is_soft(i)]
+    top_items = hard_top + soft_top
+
+    # Top story — prefer genuine breaking/hard news. Priority order:
+    #   1. Hard headlines from the wire/cable networks (CNN, MSNBC, ABC, CBS)
+    #   2. Political outlets (TPM, Daily Kos, Raw Story, PoliticusUSA)
+    #   3. Any remaining hard top item (e.g. Guardian hard news)
+    #   4. Absolute fallback: anything
+    NETWORKS = {"MSNBC", "CNN", "ABC News", "CBS News"}
+    network_hard = [i for i in hard_top if i["source"] in NETWORKS]
     top_html = ""
-    if top_items:
-        hero = top_items[0]
+    hero_pool = network_hard + pol_items + hard_top + top_items
+    if hero_pool:
+        hero = hero_pool[0]
         hero_link = html.escape(hero['link'])
         hero_title_enc = quote(hero['title'])
         top_html = f"""<div id="top-story">
@@ -238,7 +298,10 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     <a href="https://www.threads.net/intent/post?text={hero_title_enc}%20{hero_link}" target="_blank" rel="noopener noreferrer" title="Share on Threads">@</a>
   </div>
 </div>"""
-        top_items = top_items[1:]
+        # Remove the chosen hero from whichever pool it came from (match by link)
+        hero_link_raw = hero['link']
+        top_items = [i for i in top_items if i['link'] != hero_link_raw]
+        pol_items = [i for i in pol_items if i['link'] != hero_link_raw]
 
     # Center column gets top stories
     center_pool = top_items + prog_items + other_items
