@@ -293,7 +293,6 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
   <div class="source-badge">{html.escape(hero['source'])}</div>
   <div class="share-buttons" style="justify-content:center">
     <a href="https://bsky.app/intent/compose?text={hero_title_enc}%20{hero_link}" target="_blank" rel="noopener noreferrer" title="Share on Bluesky">🦋</a>
-    <a href="https://mastodonshare.com/?text={hero_title_enc}&url={hero_link}" target="_blank" rel="noopener noreferrer" title="Share on Mastodon">🐘</a>
     <a href="https://twitter.com/intent/tweet?text={hero_title_enc}&url={hero_link}" target="_blank" rel="noopener noreferrer" title="Share on X">𝕏</a>
     <a href="https://www.threads.net/intent/post?text={hero_title_enc}%20{hero_link}" target="_blank" rel="noopener noreferrer" title="Share on Threads">@</a>
   </div>
@@ -384,9 +383,8 @@ PAGE_TEMPLATE = """\
 <div id="follow-bar">
   <span>Follow Us</span>
   <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
-  <a href="https://mastodon.social/@bluewavebeacon" target="_blank" rel="noopener noreferrer">🐘 Mastodon</a>
-  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
-  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+  <a href="https://instagram.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
 </div>
 
 <div id="breaking-banner" style="display:none">
