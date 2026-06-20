@@ -390,16 +390,6 @@ PAGE_TEMPLATE = """\
     </div>
   </div>
 
-  <!-- READER POLL -->
-  <div id="poll-section">
-    <h3>📊 Reader Poll: What issue matters most to you this week?</h3>
-    <div class="poll-option" data-pct="38"><span>Climate &amp; Environment</span><span class="poll-result poll-pct">38%</span></div>
-    <div class="poll-option" data-pct="27"><span>Healthcare &amp; Medicare</span><span class="poll-result poll-pct">27%</span></div>
-    <div class="poll-option" data-pct="20"><span>Voting Rights &amp; Democracy</span><span class="poll-result poll-pct">20%</span></div>
-    <div class="poll-option" data-pct="15"><span>Labor &amp; Wages</span><span class="poll-result poll-pct">15%</span></div>
-    <p style="font-size:11px;color:var(--gray-mid);margin-top:8px;">Click an option to vote and see results.</p>
-  </div>
-
   <!-- NEWSLETTER -->
   <div id="newsletter">
     <h3>🌊 Daily Briefing Newsletter</h3>
@@ -447,17 +437,6 @@ document.getElementById('headline-search').addEventListener('input', function (e
   document.querySelectorAll('.news-link').forEach(function (link) {{
     const text = link.textContent.toLowerCase();
     link.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
-  }});
-}});
-
-// Reader poll
-document.querySelectorAll('.poll-option').forEach(function (opt) {{
-  opt.addEventListener('click', function () {{
-    if (document.getElementById('poll-section').classList.contains('poll-voted')) return;
-    document.getElementById('poll-section').classList.add('poll-voted');
-    document.querySelectorAll('.poll-option').forEach(function (o) {{
-      o.style.background = 'linear-gradient(to right, var(--blue-pale) ' + o.dataset.pct + '%, transparent ' + o.dataset.pct + '%)';
-    }});
   }});
 }});
 

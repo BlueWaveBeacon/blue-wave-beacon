@@ -589,9 +589,15 @@ footer .footer-links { margin-bottom: 8px; display: flex; justify-content: cente
 @media (prefers-color-scheme: dark) {
   body { background: #0f172a; color: #e2e8f0; }
   .column, #bluesky-section, #sources-bar { background: #1e293b; border-color: #334155; }
-  .news-link { color: #60a5fa; }
-  .news-link:hover { color: #93c5fd; }
+  .news-link { color: #93c5fd; }
+  .news-link:visited { color: #c4b5fd; }
+  .news-link:hover { color: #ffffff; }
   .news-link { border-bottom-color: #334155; }
+  .news-link.headline-big { color: #f1f5f9; }
+  .news-link.headline-big:visited { color: #cbd5e1; }
+  .news-link.headline-medium { color: #bfdbfe; }
+  .news-link.headline-medium:visited { color: #d8b4fe; }
+  .news-link .source { color: #94a3b8; }
   #top-story { background: #1e293b; border-color: #3b82f6; }
   #top-story h1 a { color: #e2e8f0; }
   .donate-card { background: #1e293b; border-color: #334155; }
