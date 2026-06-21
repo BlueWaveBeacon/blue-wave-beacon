@@ -129,6 +129,7 @@ def _parse_feed(url: str):
     """Fetch via requests with browser-like headers (handles redirects + gzip and avoids
     the bot blocks that make Substack/HuffPost/etc. return empty for feedparser's bare
     fetcher), then hand the bytes to feedparser. Falls back to feedparser's own fetcher."""
+    # 1) Direct fetch with browser-like headers.
     try:
         r = requests.get(url, headers=FEED_HEADERS, timeout=15)
         if r.status_code == 200 and r.content:
@@ -136,8 +137,21 @@ def _parse_feed(url: str):
         print(f"  [WARN] {url}: HTTP {r.status_code}", file=sys.stderr)
     except Exception as e:
         print(f"  [WARN] requests failed for {url}: {e}", file=sys.stderr)
-    # Fall back to feedparser's own fetcher, but never let it raise (it can throw on
-    # dropped connections, which would otherwise crash the whole run).
+    # 2) Retry through a public proxy. Some feeds (Substack) return 403 to datacenter IPs
+    #    such as GitHub Actions runners; the proxy fetches from a non-blocked IP. This is
+    #    what keeps the Substack section from vanishing on the scheduled CI runs.
+    try:
+        proxied = "https://api.allorigins.win/raw?url=" + quote(url, safe="")
+        r = requests.get(proxied, headers={"User-Agent": BROWSER_UA}, timeout=25)
+        if r.status_code == 200 and r.content:
+            f = feedparser.parse(r.content)
+            if f.entries:
+                return f
+        print(f"  [WARN] proxy {url}: HTTP {r.status_code}", file=sys.stderr)
+    except Exception as e:
+        print(f"  [WARN] proxy failed for {url}: {e}", file=sys.stderr)
+    # 3) Last resort: feedparser's own fetcher, guarded so a dropped connection can't
+    #    crash the whole run.
     try:
         return feedparser.parse(url, request_headers={"User-Agent": BROWSER_UA})
     except Exception as e:
