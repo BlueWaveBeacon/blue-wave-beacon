@@ -3,18 +3,21 @@
 on:
   schedule:
     # GitHub's scheduler is unreliable (it silently drops many runs), so we schedule
-    # SEVERAL attempts across the late-morning/midday window. The workflow is idempotent:
-    # if the news hasn't changed since the last run it commits nothing, so extra runs are
-    # harmless. Times are UTC (GitHub does not observe daylight saving).
-    #   14:17 UTC = 10:17 EDT / 09:17 EST
-    #   15:17 UTC = 11:17 EDT / 10:17 EST
-    #   16:17 UTC = 12:17 EDT / 11:17 EST
-    #   17:17 UTC = 13:17 EDT / 12:17 EST
-    # Minute :17 (not :00) avoids the top-of-hour window GitHub delays most.
-    - cron: "17 14 * * *"
-    - cron: "17 15 * * *"
-    - cron: "17 16 * * *"
-    - cron: "17 17 * * *"
+    # SEVERAL attempts across the day. The workflow is idempotent: if the news hasn't
+    # changed since the last run it commits nothing, so extra runs are harmless.
+    # Times are UTC (GitHub does NOT observe daylight saving), tuned for Eastern Time.
+    # During EDT (summer, UTC-4) these fire at the target ET times below; during EST
+    # (winter, UTC-5) they fire one hour earlier in ET (8:50/10:50/1:50/3:50/5:50).
+    #   13:50 UTC =  9:50 AM EDT
+    #   15:50 UTC = 11:50 AM EDT
+    #   18:50 UTC =  2:50 PM EDT
+    #   20:50 UTC =  4:50 PM EDT
+    #   22:50 UTC =  6:50 PM EDT
+    - cron: "50 13 * * *"
+    - cron: "50 15 * * *"
+    - cron: "50 18 * * *"
+    - cron: "50 20 * * *"
+    - cron: "50 22 * * *"
   workflow_dispatch: # also allows manual trigger from GitHub UI
 
 permissions:
