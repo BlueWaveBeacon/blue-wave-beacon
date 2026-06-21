@@ -1,30 +1,76 @@
-﻿name: Daily News Update
+name: Daily News Update
 
 on:
   schedule:
-    # GitHub's scheduler is unreliable (it silently drops many runs), so we schedule
-    # SEVERAL attempts across the day. The workflow is idempotent: if the news hasn't
-    # changed since the last run it commits nothing, so extra runs are harmless.
-    # Times are UTC (GitHub does NOT observe daylight saving), tuned for Eastern Time.
-    # During EDT (summer, UTC-4) these fire at the target ET times below; during EST
-    # (winter, UTC-5) they fire one hour earlier in ET (8:50/10:50/1:50/3:50/5:50).
-    #   13:50 UTC =  9:50 AM EDT
-    #   15:50 UTC = 11:50 AM EDT
-    #   18:50 UTC =  2:50 PM EDT
-    #   20:50 UTC =  4:50 PM EDT
-    #   22:50 UTC =  6:50 PM EDT
-    - cron: "50 13 * * *"
-    - cron: "50 15 * * *"
-    - cron: "50 18 * * *"
-    - cron: "50 20 * * *"
-    - cron: "50 22 * * *"
+    # We want FIXED Eastern-time run slots: 9:50am, 11:50am, 2:50pm, 4:50pm, 6:50pm ET.
+    # GitHub cron is UTC-only and does NOT observe daylight saving, so each ET slot maps
+    # to a different UTC hour in summer (EDT, UTC-4) vs winter (EST, UTC-5). To keep the
+    # ET wall-clock times constant year-round we schedule BOTH offsets for every slot and
+    # let the "gate" job below drop the firings that don't match Eastern time today.
+    # GitHub's scheduler is also unreliable (it silently drops runs); the workflow is
+    # idempotent, so any extra runs that slip through commit nothing and are harmless.
+    #
+    #   ET slot     EDT (summer)   EST (winter)
+    #    9:50 AM      13:50 UTC       14:50 UTC
+    #   11:50 AM      15:50 UTC       16:50 UTC
+    #    2:50 PM      18:50 UTC       19:50 UTC
+    #    4:50 PM      20:50 UTC       21:50 UTC
+    #    6:50 PM      22:50 UTC       23:50 UTC
+    - cron: "50 13 * * *"   # 9:50 AM EDT
+    - cron: "50 14 * * *"   # 9:50 AM EST
+    - cron: "50 15 * * *"   # 11:50 AM EDT
+    - cron: "50 16 * * *"   # 11:50 AM EST
+    - cron: "50 18 * * *"   # 2:50 PM EDT
+    - cron: "50 19 * * *"   # 2:50 PM EST
+    - cron: "50 20 * * *"   # 4:50 PM EDT
+    - cron: "50 21 * * *"   # 4:50 PM EST
+    - cron: "50 22 * * *"   # 6:50 PM EDT
+    - cron: "50 23 * * *"   # 6:50 PM EST
   workflow_dispatch: # also allows manual trigger from GitHub UI
 
 permissions:
   contents: write
 
 jobs:
+  # Only proceed when the current Eastern-time clock is near one of the 5 target slots.
+  # This lets us schedule both UTC offsets above without double-running: in any given
+  # season, half the cron firings land ~1h off the ET targets and get filtered out here.
+  # Manual (workflow_dispatch) runs always proceed.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - name: Check Eastern Time window
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Manual run — proceeding."
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          now=$(TZ="America/New_York" date +%H:%M)
+          mins=$(( 10#${now%%:*} * 60 + 10#${now##*:} ))
+          # Target ET slots in minutes since midnight: 9:50, 11:50, 2:50, 4:50, 6:50.
+          best=9999
+          for t in 590 710 890 1010 1130; do
+            d=$(( mins - t )); [ $d -lt 0 ] && d=$(( -d ))
+            [ $d -lt $best ] && best=$d
+          done
+          echo "Eastern time now $now; nearest target slot is ${best} min away."
+          # Accept within 30 min (covers GitHub's scheduling lag). Wrong-season firings
+          # land ~60 min from any target, so they fall outside this window and are skipped.
+          if [ "$best" -le 30 ]; then
+            echo "Within Eastern window — proceeding."
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Outside Eastern window — skipping this firing."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
   aggregate:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
 
     steps:
