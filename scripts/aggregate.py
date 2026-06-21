@@ -117,17 +117,35 @@ def _entry_too_old(entry) -> bool:
     except Exception:
         return False
 
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+FEED_HEADERS = {
+    "User-Agent": BROWSER_UA,
+    "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+def _parse_feed(url: str):
+    """Fetch via requests with browser-like headers (handles redirects + gzip and avoids
+    the bot blocks that make Substack/HuffPost/etc. return empty for feedparser's bare
+    fetcher), then hand the bytes to feedparser. Falls back to feedparser's own fetcher."""
+    try:
+        r = requests.get(url, headers=FEED_HEADERS, timeout=15)
+        if r.status_code == 200 and r.content:
+            return feedparser.parse(r.content)
+        print(f"  [WARN] {url}: HTTP {r.status_code}", file=sys.stderr)
+    except Exception as e:
+        print(f"  [WARN] request failed for {url}: {e}", file=sys.stderr)
+    return feedparser.parse(url, request_headers={"User-Agent": BROWSER_UA})
+
 def fetch_feed(source: dict) -> list[dict]:
     # Retry once: several feeds (Substack especially) intermittently return empty/closed
     # connections, which is what made the Substack section vanish on some runs.
     feed = None
     for attempt in (1, 2):
-        try:
-            feed = feedparser.parse(source["url"], request_headers={"User-Agent": "BlueWaveBeacon/1.0"})
-            if feed.entries:
-                break
-        except Exception as e:
-            print(f"  [WARN] {source['name']} (attempt {attempt}): {e}", file=sys.stderr)
+        feed = _parse_feed(source["url"])
+        if feed and feed.entries:
+            break
     if not feed:
         return []
     # Judge the whole feed by its newest dated entry. A zombie/frozen feed (e.g. CNN's,
