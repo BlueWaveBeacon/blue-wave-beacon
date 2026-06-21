@@ -135,8 +135,14 @@ def _parse_feed(url: str):
             return feedparser.parse(r.content)
         print(f"  [WARN] {url}: HTTP {r.status_code}", file=sys.stderr)
     except Exception as e:
-        print(f"  [WARN] request failed for {url}: {e}", file=sys.stderr)
-    return feedparser.parse(url, request_headers={"User-Agent": BROWSER_UA})
+        print(f"  [WARN] requests failed for {url}: {e}", file=sys.stderr)
+    # Fall back to feedparser's own fetcher, but never let it raise (it can throw on
+    # dropped connections, which would otherwise crash the whole run).
+    try:
+        return feedparser.parse(url, request_headers={"User-Agent": BROWSER_UA})
+    except Exception as e:
+        print(f"  [WARN] feedparser failed for {url}: {e}", file=sys.stderr)
+        return None
 
 def fetch_feed(source: dict) -> list[dict]:
     # Retry once: several feeds (Substack especially) intermittently return empty/closed
