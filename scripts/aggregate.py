@@ -480,6 +480,7 @@ PAGE_TEMPLATE = """\
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="BLUE WAVE BEACON — progressive news aggregator updated daily." />
   <title>BLUE WAVE BEACON</title>
+  <link rel="canonical" href="https://bluewavebeacon.com/" />
   <link rel="stylesheet" href="style.css" />
   <link rel="alternate" type="application/rss+xml" title="BLUE WAVE BEACON RSS" href="feed.xml" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
