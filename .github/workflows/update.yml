@@ -92,7 +92,7 @@ jobs:
         run: |
           git config user.name  "BlueWaveBot"
           git config user.email "bot@bluewavebeacon.com"
-          git add index.html feed.xml sitemap.xml archive.html archive/
+          git add index.html feed.xml sitemap.xml archive.html archive/ substack_cache.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0

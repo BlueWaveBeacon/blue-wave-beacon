@@ -87,8 +87,23 @@ def pick_quote() -> dict:
     except Exception:
         return {"text": "The arc of the moral universe is long, but it bends toward justice.", "author": "Martin Luther King Jr."}
 
+SUBSTACK_CACHE = ROOT / "substack_cache.json"
+
 def render_substack_section(items: list[dict]) -> str:
     sub_items = [i for i in items if i["cat"] == "substack"]
+    # Cache the last good fetch so the section never vanishes if every Substack fetch
+    # fails on a given run (Substack 403s GitHub's IP and the proxy can be flaky).
+    if sub_items:
+        try:
+            SUBSTACK_CACHE.write_text(json.dumps(sub_items), encoding="utf-8")
+        except Exception:
+            pass
+    else:
+        try:
+            sub_items = json.loads(SUBSTACK_CACHE.read_text(encoding="utf-8"))
+            print("  [INFO] Substack: using cached items (live fetch empty)", file=sys.stderr)
+        except Exception:
+            sub_items = []
     if not sub_items:
         return ""
     links = "\n".join(render_link(i) for i in sub_items[:9])
@@ -137,26 +152,43 @@ def _parse_feed(url: str):
         print(f"  [WARN] {url}: HTTP {r.status_code}", file=sys.stderr)
     except Exception as e:
         print(f"  [WARN] requests failed for {url}: {e}", file=sys.stderr)
-    # 2) Retry through a public proxy. Some feeds (Substack) return 403 to datacenter IPs
-    #    such as GitHub Actions runners; the proxy fetches from a non-blocked IP. This is
-    #    what keeps the Substack section from vanishing on the scheduled CI runs.
-    try:
-        proxied = "https://api.allorigins.win/raw?url=" + quote(url, safe="")
-        r = requests.get(proxied, headers={"User-Agent": BROWSER_UA}, timeout=25)
-        if r.status_code == 200 and r.content:
-            f = feedparser.parse(r.content)
-            if f.entries:
-                return f
-        print(f"  [WARN] proxy {url}: HTTP {r.status_code}", file=sys.stderr)
-    except Exception as e:
-        print(f"  [WARN] proxy failed for {url}: {e}", file=sys.stderr)
-    # 3) Last resort: feedparser's own fetcher, guarded so a dropped connection can't
+    # 2) Last resort: feedparser's own fetcher, guarded so a dropped connection can't
     #    crash the whole run.
     try:
         return feedparser.parse(url, request_headers={"User-Agent": BROWSER_UA})
     except Exception as e:
         print(f"  [WARN] feedparser failed for {url}: {e}", file=sys.stderr)
         return None
+
+def _fetch_via_rss2json(url: str) -> list[dict]:
+    """Fetch a feed through rss2json (returns JSON, fetched from its own non-blocked IP).
+    Used for feeds that 403 datacenter IPs — notably Substack, which blocks GitHub's
+    runners directly. Returns feedparser-style entry dicts (title/link/published_parsed)."""
+    try:
+        api = "https://api.rss2json.com/v1/api.json?count=10&rss_url=" + quote(url, safe="")
+        r = requests.get(api, headers={"User-Agent": BROWSER_UA}, timeout=25)
+        if r.status_code != 200:
+            print(f"  [WARN] rss2json {url}: HTTP {r.status_code}", file=sys.stderr)
+            return []
+        data = r.json()
+        if data.get("status") != "ok":
+            return []
+        entries = []
+        for it in data.get("items", []):
+            tm = None
+            pub = it.get("pubDate") or ""
+            for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%SZ"):
+                try:
+                    tm = datetime.strptime(pub, fmt).timetuple()
+                    break
+                except Exception:
+                    pass
+            entries.append({"title": it.get("title", ""), "link": it.get("link", "#"),
+                            "published_parsed": tm})
+        return entries
+    except Exception as e:
+        print(f"  [WARN] rss2json failed for {url}: {e}", file=sys.stderr)
+        return []
 
 def fetch_feed(source: dict) -> list[dict]:
     # Retry once: several feeds (Substack especially) intermittently return empty/closed
@@ -166,14 +198,19 @@ def fetch_feed(source: dict) -> list[dict]:
         feed = _parse_feed(source["url"])
         if feed and feed.entries:
             break
-    if not feed:
+    entries = list(feed.entries) if (feed and feed.entries) else []
+    # If a direct fetch came back empty and this is a Substack feed (which 403s GitHub's
+    # runner IP), fetch it through rss2json instead so the section stays populated on CI.
+    if not entries and source.get("cat") == "substack":
+        entries = _fetch_via_rss2json(source["url"])
+    if not entries:
         return []
     # Judge the whole feed by its newest dated entry. A zombie/frozen feed (e.g. CNN's,
     # stuck in 2023) often has many DATELESS entries that would otherwise slip past the
     # per-entry check — so if the newest date we can find is itself stale, drop the entire
     # feed. Feeds with no dates anywhere can't be judged and are kept.
     dated = [calendar.timegm(e.get("published_parsed") or e.get("updated_parsed"))
-             for e in feed.entries
+             for e in entries
              if e.get("published_parsed") or e.get("updated_parsed")]
     if dated:
         newest = datetime.fromtimestamp(max(dated), tz=timezone.utc)
@@ -181,7 +218,7 @@ def fetch_feed(source: dict) -> list[dict]:
             print(f"  [WARN] {source['name']}: feed stale (newest {newest.date()}); skipping", file=sys.stderr)
             return []
     items = []
-    for entry in feed.entries:
+    for entry in entries:
         if len(items) >= MAX_PER_SOURCE:
             break
         if _entry_too_old(entry):
