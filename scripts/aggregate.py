@@ -41,10 +41,11 @@ SOURCES = [
     {"name": "ABC News",        "url": "https://feeds.abcnews.com/abcnews/topstories", "cat": "top"},
     {"name": "CBS News",        "url": "https://www.cbsnews.com/latest/rss/main",      "cat": "top"},
     # Politics
-    {"name": "Talking Points Memo","url": "https://feeds.feedburner.com/talkingpointsmemo/main","cat": "politics"},
-    {"name": "Daily Kos",       "url": "https://www.dailykos.com/stories/feed.rss",    "cat": "politics"},
+    {"name": "Talking Points Memo","url": "https://talkingpointsmemo.com/feed",        "cat": "politics"},
+    {"name": "Daily Kos",       "url": "https://www.dailykos.com/blogs/main.rss",      "cat": "politics"},
     {"name": "Raw Story",       "url": "https://www.rawstory.com/feed/",               "cat": "politics"},
     {"name": "Politicus USA",   "url": "https://www.politicususa.com/feed",            "cat": "politics"},
+    {"name": "The Daily Beast", "url": "https://www.thedailybeast.com/arc/outboundfeeds/rss/", "cat": "politics"},
     # Investigative
     {"name": "ProPublica",      "url": "https://www.propublica.org/feeds/propublica/main","cat": "investigation"},
     {"name": "The Intercept",   "url": "https://theintercept.com/feed/?lang=en",       "cat": "investigation"},
@@ -53,8 +54,12 @@ SOURCES = [
     {"name": "The Nation",      "url": "https://www.thenation.com/feed/?post_type=article","cat": "opinion"},
     {"name": "Slate",           "url": "https://slate.com/feeds/all.rss",              "cat": "opinion"},
     {"name": "Salon",           "url": "https://www.salon.com/feed/",                  "cat": "opinion"},
+    {"name": "The New Republic","url": "https://newrepublic.com/rss.xml",              "cat": "opinion"},
+    {"name": "Jacobin",         "url": "https://jacobin.com/feed",                     "cat": "opinion"},
+    {"name": "The Atlantic",    "url": "https://www.theatlantic.com/feed/all/",        "cat": "opinion"},
     # Progressive
-    {"name": "Common Dreams",   "url": "https://www.commondreams.org/feeds/latest",    "cat": "progressive"},
+    {"name": "Common Dreams",   "url": "https://www.commondreams.org/rss.xml",         "cat": "progressive"},
+    {"name": "AlterNet",        "url": "https://www.alternet.org/feeds/feed.rss",      "cat": "progressive"},
     {"name": "Truthout",        "url": "https://truthout.org/feed/",                   "cat": "progressive"},
     {"name": "Democracy Now",   "url": "https://www.democracynow.org/democracynow.rss","cat": "progressive"},
     # Science / Climate
@@ -63,7 +68,7 @@ SOURCES = [
     # Substack — liberal/progressive contributors
     {"name": "Heather Cox Richardson", "url": "https://heathercoxrichardson.substack.com/feed", "cat": "substack"},
     {"name": "Robert Reich",    "url": "https://robertreich.substack.com/feed",         "cat": "substack"},
-    {"name": "The Contrarian",  "url": "https://www.thecontrarian.org/feed",            "cat": "substack"},
+    {"name": "The Contrarian",  "url": "https://contrarian.substack.com/feed",          "cat": "substack"},
 ]
 
 MAX_PER_SOURCE = 5   # articles per source
@@ -578,16 +583,6 @@ PAGE_TEMPLATE = """\
     <div class="sources-list">
       {source_pills}
     </div>
-  </div>
-
-  <!-- NEWSLETTER -->
-  <div id="newsletter">
-    <h3>🌊 Daily Briefing Newsletter</h3>
-    <p>Get the top progressive stories delivered to your inbox every morning.</p>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <input type="email" name="email" placeholder="your@email.com" required />
-      <button type="submit">Subscribe</button>
-    </form>
   </div>
 
   <!-- AD SLOT BOTTOM -->
