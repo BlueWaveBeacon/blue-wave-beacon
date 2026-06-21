@@ -12,7 +12,8 @@ import html
 import random
 import re
 import sys
-from datetime import datetime, timezone
+import calendar
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
@@ -28,10 +29,14 @@ ABOUT_URL = "about.html"
 # Left-leaning RSS sources  {name, url, category}
 SOURCES = [
     # Top news
-    {"name": "The Guardian US", "url": "https://www.theguardian.com/us/rss",          "cat": "top"},
+    # Guardian: use the /us-news section feed (hard US news) NOT /us/rss, which is the
+    # soft front page full of culture/sport/lifestyle features.
+    {"name": "The Guardian US", "url": "https://www.theguardian.com/us-news/rss",      "cat": "top"},
     {"name": "HuffPost",        "url": "https://www.huffpost.com/section/front-page/feed", "cat": "top"},
     {"name": "Vox",             "url": "https://www.vox.com/rss/index.xml",            "cat": "top"},
-    {"name": "MSNBC",           "url": "https://www.msnbc.com/feeds/latest",           "cat": "top"},
+    {"name": "NBC News",        "url": "https://feeds.nbcnews.com/nbcnews/public/news","cat": "top"},
+    # CNN has deprecated all its RSS feeds (they serve frozen 2023 content); kept here in
+    # case it ever revives — the MAX_AGE_DAYS freshness guard drops its stale entries.
     {"name": "CNN",             "url": "http://rss.cnn.com/rss/cnn_topstories.rss",    "cat": "top"},
     {"name": "ABC News",        "url": "https://feeds.abcnews.com/abcnews/topstories", "cat": "top"},
     {"name": "CBS News",        "url": "https://www.cbsnews.com/latest/rss/main",      "cat": "top"},
@@ -63,6 +68,7 @@ SOURCES = [
 
 MAX_PER_SOURCE = 5   # articles per source
 MAX_PER_COLUMN = 18  # links per column
+MAX_AGE_DAYS = 14    # drop entries older than this (guards against zombie feeds like CNN's)
 BLUESKY_POST_COUNT = 6
 BLUESKY_TRENDING_COUNT = 12
 
@@ -99,19 +105,54 @@ def clean(text: str) -> str:
     text = re.sub(r"<[^>]+>", "", text or "")
     return html.unescape(text).strip()
 
-def fetch_feed(source: dict) -> list[dict]:
+def _entry_too_old(entry) -> bool:
+    """True if the entry has a parseable date older than MAX_AGE_DAYS. Entries with no
+    usable date are kept (we can't judge them). feedparser dates are UTC struct_times."""
+    tm = entry.get("published_parsed") or entry.get("updated_parsed")
+    if not tm:
+        return False
     try:
-        feed = feedparser.parse(source["url"], request_headers={"User-Agent": "BlueWaveBeacon/1.0"})
-        items = []
-        for entry in feed.entries[:MAX_PER_SOURCE]:
-            title = clean(entry.get("title", ""))
-            link  = entry.get("link", "#")
-            if title and link:
-                items.append({"title": title, "link": link, "source": source["name"], "cat": source["cat"]})
-        return items
-    except Exception as e:
-        print(f"  [WARN] {source['name']}: {e}", file=sys.stderr)
+        published = datetime.fromtimestamp(calendar.timegm(tm), tz=timezone.utc)
+        return datetime.now(timezone.utc) - published > timedelta(days=MAX_AGE_DAYS)
+    except Exception:
+        return False
+
+def fetch_feed(source: dict) -> list[dict]:
+    # Retry once: several feeds (Substack especially) intermittently return empty/closed
+    # connections, which is what made the Substack section vanish on some runs.
+    feed = None
+    for attempt in (1, 2):
+        try:
+            feed = feedparser.parse(source["url"], request_headers={"User-Agent": "BlueWaveBeacon/1.0"})
+            if feed.entries:
+                break
+        except Exception as e:
+            print(f"  [WARN] {source['name']} (attempt {attempt}): {e}", file=sys.stderr)
+    if not feed:
         return []
+    # Judge the whole feed by its newest dated entry. A zombie/frozen feed (e.g. CNN's,
+    # stuck in 2023) often has many DATELESS entries that would otherwise slip past the
+    # per-entry check — so if the newest date we can find is itself stale, drop the entire
+    # feed. Feeds with no dates anywhere can't be judged and are kept.
+    dated = [calendar.timegm(e.get("published_parsed") or e.get("updated_parsed"))
+             for e in feed.entries
+             if e.get("published_parsed") or e.get("updated_parsed")]
+    if dated:
+        newest = datetime.fromtimestamp(max(dated), tz=timezone.utc)
+        if datetime.now(timezone.utc) - newest > timedelta(days=MAX_AGE_DAYS):
+            print(f"  [WARN] {source['name']}: feed stale (newest {newest.date()}); skipping", file=sys.stderr)
+            return []
+    items = []
+    for entry in feed.entries:
+        if len(items) >= MAX_PER_SOURCE:
+            break
+        if _entry_too_old(entry):
+            continue  # skip stale entries within an otherwise-fresh feed
+        title = clean(entry.get("title", ""))
+        link  = entry.get("link", "#")
+        if title and link:
+            items.append({"title": title, "link": link, "source": source["name"], "cat": source["cat"]})
+    return items
 
 def fetch_all_feeds() -> list[dict]:
     all_items = []
@@ -254,11 +295,24 @@ SOFT_URL_SEGMENTS = (
     "/travel", "/art-and-design", "/artanddesign", "/tv-and-radio", "/television",
     "/film", "/movies", "/stage", "/relationships", "/beauty", "/style", "/celebrity",
     "/entertainment", "/puzzles", "/crosswords", "/horoscope", "/global/", "/pets",
+    "/lifeandstyle", "/audio", "/podcast", "/gallery", "/comics",
+)
+
+# Title markers for obvious sport/entertainment/lifestyle pieces that ride on hard-news
+# feeds with flat URLs (e.g. Vox's /future-perfect/...) the URL filter can't catch.
+# Kept tight to avoid false positives on real news.
+SOFT_TITLE_PATTERNS = (
+    "world cup", "super bowl", "premier league", "nba finals", "stanley cup",
+    "box office", "red carpet", "movie review", "film review", "toy story",
+    "best shows", "what to watch", "recipe", "horoscope", "taylor swift tour",
 )
 
 def is_soft(item: dict) -> bool:
     url = (item.get("link") or "").lower()
-    return any(seg in url for seg in SOFT_URL_SEGMENTS)
+    if any(seg in url for seg in SOFT_URL_SEGMENTS):
+        return True
+    title = (item.get("title") or "").lower()
+    return any(p in title for p in SOFT_TITLE_PATTERNS)
 
 def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     """Returns (top_story_html, left_col_html, center_col_html, right_col_html)"""
@@ -269,17 +323,17 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     prog_items  = [i for i in items if i["cat"] in ("progressive", "climate")]
     other_items = [i for i in items if i["cat"] not in ("top","politics","investigation","opinion","progressive","climate","substack")]
 
-    # Keep hard news first within the top bucket; push soft/lifestyle items to the bottom.
+    # Drop soft/lifestyle/sport/entertainment items from the top bucket entirely — this
+    # section is hard news only. (Other categories keep their items.)
     hard_top = [i for i in top_items if not is_soft(i)]
-    soft_top = [i for i in top_items if is_soft(i)]
-    top_items = hard_top + soft_top
+    top_items = hard_top
 
     # Top story — prefer genuine breaking/hard news. Priority order:
     #   1. Hard headlines from the wire/cable networks (CNN, MSNBC, ABC, CBS)
     #   2. Political outlets (TPM, Daily Kos, Raw Story, PoliticusUSA)
     #   3. Any remaining hard top item (e.g. Guardian hard news)
     #   4. Absolute fallback: anything
-    NETWORKS = {"MSNBC", "CNN", "ABC News", "CBS News"}
+    NETWORKS = {"NBC News", "CNN", "ABC News", "CBS News"}
     network_hard = [i for i in hard_top if i["source"] in NETWORKS]
     top_html = ""
     hero_pool = network_hard + pol_items + hard_top + top_items
