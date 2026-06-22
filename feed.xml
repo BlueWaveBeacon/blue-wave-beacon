@@ -1,360 +1,361 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
 <rss version="2.0">
 <channel>
   <title>BLUE WAVE BEACON</title>
   <link>https://bluewavebeacon.com</link>
   <description>Progressive news aggregated daily</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 22 Jun 2026 20:23:43 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 22 Jun 2026 20:32:00 +0000</lastBuildDate>
   <item>
     <title>Federal judge blocks Trump administration efforts to subpoena Minnesota governor Tim Walz and others – live</title>
     <link>https://www.theguardian.com/us-news/live/2026/jun/22/trump-reflecting-pool-vandalized-lincoln-memorial-iran-us-politics-latest-news-updates</link>
     <guid isPermaLink="true">https://www.theguardian.com/us-news/live/2026/jun/22/trump-reflecting-pool-vandalized-lincoln-memorial-iran-us-politics-latest-news-updates</guid>
     <source url="https://www.theguardian.com/us-news/rss">The Guardian US</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>New York City House primary emerges as key battleground in ‘AI civil war’</title>
     <link>https://www.theguardian.com/us-news/2026/jun/22/new-york-city-house-primary-race</link>
     <guid isPermaLink="true">https://www.theguardian.com/us-news/2026/jun/22/new-york-city-house-primary-race</guid>
     <source url="https://www.theguardian.com/us-news/rss">The Guardian US</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Judge blocks subpoenas for Walz and others over Minnesota immigration crackdown</title>
     <link>https://www.theguardian.com/us-news/2026/jun/22/federal-subpoenas-minnesota-officials-order</link>
     <guid isPermaLink="true">https://www.theguardian.com/us-news/2026/jun/22/federal-subpoenas-minnesota-officials-order</guid>
     <source url="https://www.theguardian.com/us-news/rss">The Guardian US</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>US supreme court reinstates murder conviction in case of Etan Patz</title>
     <link>https://www.theguardian.com/us-news/2026/jun/22/etan-patz-pedro-hernandez-conviction-reinstated</link>
     <guid isPermaLink="true">https://www.theguardian.com/us-news/2026/jun/22/etan-patz-pedro-hernandez-conviction-reinstated</guid>
     <source url="https://www.theguardian.com/us-news/rss">The Guardian US</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Trump claims ‘vandals’ foiled his $14m revamp of DC’s reflecting pool. What actually happened?</title>
     <link>https://www.theguardian.com/us-news/2026/jun/22/what-happened-dc-reflecting-pool-vandalism-arrest-algae</link>
     <guid isPermaLink="true">https://www.theguardian.com/us-news/2026/jun/22/what-happened-dc-reflecting-pool-vandalism-arrest-algae</guid>
     <source url="https://www.theguardian.com/us-news/rss">The Guardian US</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>The race splitting Zohran Mamdani’s coalition</title>
+    <link>https://www.vox.com/america-actually/492599/new-york-7th-district-primary-antonio-reynoso-claire-valdez-nydia-velazquez-mamdani</link>
+    <guid isPermaLink="true">https://www.vox.com/america-actually/492599/new-york-7th-district-primary-antonio-reynoso-claire-valdez-nydia-velazquez-mamdani</guid>
+    <source url="https://www.vox.com/rss/index.xml">Vox</source>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>How the Antichrist infiltrated politics</title>
     <link>https://www.vox.com/podcasts/492335/antichrist-trump-evangelical-christians-jesus</link>
     <guid isPermaLink="true">https://www.vox.com/podcasts/492335/antichrist-trump-evangelical-christians-jesus</guid>
     <source url="https://www.vox.com/rss/index.xml">Vox</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>You don’t need better boundaries. You need a better framework.</title>
     <link>https://www.vox.com/the-highlight/466054/boundaries-psychology-self-care-burnout</link>
     <guid isPermaLink="true">https://www.vox.com/the-highlight/466054/boundaries-psychology-self-care-burnout</guid>
     <source url="https://www.vox.com/rss/index.xml">Vox</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Why we don’t actually want a world without mosquitoes</title>
     <link>https://www.vox.com/explain-it-to-me/492353/mosquitoes-malaria-plasmodium-research-explained</link>
     <guid isPermaLink="true">https://www.vox.com/explain-it-to-me/492353/mosquitoes-malaria-plasmodium-research-explained</guid>
     <source url="https://www.vox.com/rss/index.xml">Vox</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>10 reasons why the World Cup is the greatest sporting event on Earth</title>
     <link>https://www.vox.com/future-perfect/492477/world-cup-soccer-football-fifa-united-states-fans</link>
     <guid isPermaLink="true">https://www.vox.com/future-perfect/492477/world-cup-soccer-football-fifa-united-states-fans</guid>
     <source url="https://www.vox.com/rss/index.xml">Vox</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
-  </item>
-  <item>
-    <title>A big new test of Zohran Mamdani’s influence</title>
-    <link>https://www.vox.com/america-actually/492145/new-york-democratic-primaries-bores-ai-mamdani-dsa-israel</link>
-    <guid isPermaLink="true">https://www.vox.com/america-actually/492145/new-york-democratic-primaries-bores-ai-mamdani-dsa-israel</guid>
-    <source url="https://www.vox.com/rss/index.xml">Vox</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Lionel Messi breaks record for most career World Cup goals</title>
     <link>https://www.nbcnews.com/now/video/lionel-messi-breaks-record-for-most-career-world-cup-goals-265486405709</link>
     <guid isPermaLink="true">https://www.nbcnews.com/now/video/lionel-messi-breaks-record-for-most-career-world-cup-goals-265486405709</guid>
     <source url="https://feeds.nbcnews.com/nbcnews/public/news">NBC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Inside Iran, World Cup team brings joy despite uncertainty around U.S. peace talks</title>
     <link>https://www.nbcnews.com/world/iran/iran-world-cup-war-us-israel-negotiations-switzerland-vance-minab-rcna351114</link>
     <guid isPermaLink="true">https://www.nbcnews.com/world/iran/iran-world-cup-war-us-israel-negotiations-switzerland-vance-minab-rcna351114</guid>
     <source url="https://feeds.nbcnews.com/nbcnews/public/news">NBC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>From The Sports Desk: What will Messi, Mbappé and Haaland do for an encore?</title>
     <link>https://www.nbcnews.com/sports/soccer/sports-newsletter-will-messi-mbappe-haaland-encore-rcna351150</link>
     <guid isPermaLink="true">https://www.nbcnews.com/sports/soccer/sports-newsletter-will-messi-mbappe-haaland-encore-rcna351150</guid>
     <source url="https://feeds.nbcnews.com/nbcnews/public/news">NBC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Pékerman: &quot;Con Messi pensamos que lo vimos todo, y de repente nos deja con la boca abierta&quot;</title>
     <link>https://www.telemundo.com/deportes/copa-mundial-de-la-fifa-2026/video/pekerman-con-messi-pensamos-que-lo-vimos-todo-y-de-repente-nos-deja-con-la-boca-abierta-tmvo13196417</link>
     <guid isPermaLink="true">https://www.telemundo.com/deportes/copa-mundial-de-la-fifa-2026/video/pekerman-con-messi-pensamos-que-lo-vimos-todo-y-de-repente-nos-deja-con-la-boca-abierta-tmvo13196417</guid>
     <source url="https://feeds.nbcnews.com/nbcnews/public/news">NBC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Messi rompe récords y desafía cualquier pronóstico | Pasión Mundial</title>
     <link>https://www.telemundo.com/deportes/copa-mundial-de-la-fifa-2026/video/messi-rompe-records-y-desafia-cualquier-pronostico-pasion-mundial-tmvo13196415</link>
     <guid isPermaLink="true">https://www.telemundo.com/deportes/copa-mundial-de-la-fifa-2026/video/messi-rompe-records-y-desafia-cualquier-pronostico-pasion-mundial-tmvo13196415</guid>
     <source url="https://feeds.nbcnews.com/nbcnews/public/news">NBC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
-    <title>Federal judge tosses DOJ subpoenas to Tim Walz, other Minnesota officials</title>
-    <link>https://abcnews.com/Politics/federal-judge-tosses-doj-subpoenas-minnesota-gov-tim/story?id=134102990</link>
-    <guid isPermaLink="true">https://abcnews.com/Politics/federal-judge-tosses-doj-subpoenas-minnesota-gov-tim/story?id=134102990</guid>
+    <title>Will gas prices keep falling? Experts weigh in</title>
+    <link>https://abcnews.com/Business/gas-prices-falling-experts-weigh/story?id=134093047</link>
+    <guid isPermaLink="true">https://abcnews.com/Business/gas-prices-falling-experts-weigh/story?id=134093047</guid>
     <source url="https://feeds.abcnews.com/abcnews/topstories">ABC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>LIVE:  ABC News Live</title>
     <link>https://abcnews.com/video/41463246/</link>
     <guid isPermaLink="true">https://abcnews.com/video/41463246/</guid>
     <source url="https://feeds.abcnews.com/abcnews/topstories">ABC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
-    <title>US Coast Guard helicopter reportedly crashes in Alaska: USCG</title>
-    <link>https://abcnews.com/US/us-coast-guard-helicopter-reportedly-crashes-alaska-uscg/story?id=134107132</link>
-    <guid isPermaLink="true">https://abcnews.com/US/us-coast-guard-helicopter-reportedly-crashes-alaska-uscg/story?id=134107132</guid>
+    <title>Nancy Guthrie abduction: 2nd ransom note sent to Tucson TV station said she died</title>
+    <link>https://abcnews.com/US/nancy-guthrie-abduction-2nd-ransom-note-tucson-tv/story?id=134107878</link>
+    <guid isPermaLink="true">https://abcnews.com/US/nancy-guthrie-abduction-2nd-ransom-note-tucson-tv/story?id=134107878</guid>
     <source url="https://feeds.abcnews.com/abcnews/topstories">ABC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Alan Greenspan, longtime chairman of the Federal Reserve, dies at 100</title>
     <link>https://abcnews.com/Business/alan-greenspan-longtime-chairman-federal-reserve-dies-100/story?id=17446418</link>
     <guid isPermaLink="true">https://abcnews.com/Business/alan-greenspan-longtime-chairman-federal-reserve-dies-100/story?id=17446418</guid>
     <source url="https://feeds.abcnews.com/abcnews/topstories">ABC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>WATCH:  The Points Guy offers summer travel tips</title>
     <link>https://abcnews.com/video/134104653/</link>
     <guid isPermaLink="true">https://abcnews.com/video/134104653/</guid>
     <source url="https://feeds.abcnews.com/abcnews/topstories">ABC News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Judge quashes 6 grand jury subpoenas against Minnesota officials</title>
+    <link>https://www.cbsnews.com/news/minnesota-grand-jury-subpoenas-quashed-operation-metro-surge/</link>
+    <guid isPermaLink="true">https://www.cbsnews.com/news/minnesota-grand-jury-subpoenas-quashed-operation-metro-surge/</guid>
+    <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Clive Davis, legendary music executive, dies at age 94</title>
     <link>https://www.cbsnews.com/news/clive-davis-dies-age-94-music-executive/</link>
     <guid isPermaLink="true">https://www.cbsnews.com/news/clive-davis-dies-age-94-music-executive/</guid>
     <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Fight against massive Los Angeles warehouse fire enters 6th day</title>
     <link>https://www.cbsnews.com/video/fight-against-los-angeles-warehouse-fire-enters-6th-day/</link>
     <guid isPermaLink="true">https://www.cbsnews.com/video/fight-against-los-angeles-warehouse-fire-enters-6th-day/</guid>
     <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Supreme Court reinstates Etan Patz murder conviction</title>
     <link>https://www.cbsnews.com/video/supreme-court-reinstates-etan-patz-murder-conviction/</link>
     <guid isPermaLink="true">https://www.cbsnews.com/video/supreme-court-reinstates-etan-patz-murder-conviction/</guid>
     <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Trump plan would increase citizenship application fee by $570</title>
     <link>https://www.cbsnews.com/news/us-citizenship-application-fee-trump-administration-uscis/</link>
     <guid isPermaLink="true">https://www.cbsnews.com/news/us-citizenship-application-fee-trump-administration-uscis/</guid>
     <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
-  </item>
-  <item>
-    <title>Iran to let nuclear inspections resume as talks continue, Vance says</title>
-    <link>https://www.cbsnews.com/live-updates/iran-us-deal-trump-war-negotiations/</link>
-    <guid isPermaLink="true">https://www.cbsnews.com/live-updates/iran-us-deal-trump-war-negotiations/</guid>
-    <source url="https://www.cbsnews.com/latest/rss/main">CBS News</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>‘A Huge Grab of Power’: Trump and Vought Are Defying Congress on Foreign Aid</title>
     <link>https://talkingpointsmemo.com/news/a-huge-grab-of-power-trump-and-vought-are-defying-congress-on-foreign-aid</link>
     <guid isPermaLink="true">https://talkingpointsmemo.com/news/a-huge-grab-of-power-trump-and-vought-are-defying-congress-on-foreign-aid</guid>
     <source url="https://talkingpointsmemo.com/feed">Talking Points Memo</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Purity Tests and Political Action — Another Look at the Platner Debate</title>
     <link>https://talkingpointsmemo.com/edblog/purity-tests-and-political-action-another-look-at-the-platner-debate</link>
     <guid isPermaLink="true">https://talkingpointsmemo.com/edblog/purity-tests-and-political-action-another-look-at-the-platner-debate</guid>
     <source url="https://talkingpointsmemo.com/feed">Talking Points Memo</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>The Reflecting Pool as a Reflection of Trump’s Corruption and Tin-Potism</title>
     <link>https://talkingpointsmemo.com/morning-memo/the-reflecting-pool-as-a-reflection-of-trumps-corruption-and-tin-potism</link>
     <guid isPermaLink="true">https://talkingpointsmemo.com/morning-memo/the-reflecting-pool-as-a-reflection-of-trumps-corruption-and-tin-potism</guid>
     <source url="https://talkingpointsmemo.com/feed">Talking Points Memo</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>The MAGA Merch Guide to Celebrating Dad</title>
     <link>https://talkingpointsmemo.com/the-weekender/the-maga-merch-guide-to-celebrating-dad</link>
     <guid isPermaLink="true">https://talkingpointsmemo.com/the-weekender/the-maga-merch-guide-to-celebrating-dad</guid>
     <source url="https://talkingpointsmemo.com/feed">Talking Points Memo</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Israelis Turn Decisively Against Trump</title>
     <link>https://talkingpointsmemo.com/edblog/israelis-turn-decisively-against-trump</link>
     <guid isPermaLink="true">https://talkingpointsmemo.com/edblog/israelis-turn-decisively-against-trump</guid>
     <source url="https://talkingpointsmemo.com/feed">Talking Points Memo</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>How low can Trump’s approval rating go?</title>
+    <link>https://www.dailykos.com/stories/2026/6/22/800059284/news/trump-sinking-job-approval-rating-poll/</link>
+    <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800059284/news/trump-sinking-job-approval-rating-poll/</guid>
+    <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>How dare you not take Todd Blanche at his word</title>
     <link>https://www.dailykos.com/stories/2026/6/22/800059190/courts/how-dare-you-not-take-todd-blanche-at-his-word/</link>
     <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800059190/courts/how-dare-you-not-take-todd-blanche-at-his-word/</guid>
     <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>‘A huge grab of power’: Trump is defying congress on foreign aid</title>
     <link>https://www.dailykos.com/stories/2026/6/22/800059137/world/a-huge-grab-of-power-trump-is-defying-congress-on-foreign-aid/</link>
     <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800059137/world/a-huge-grab-of-power-trump-is-defying-congress-on-foreign-aid/</guid>
     <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Federal judge halts Trump administration effort to subpoena Walz in immigration enforcement probe</title>
     <link>https://www.dailykos.com/stories/2026/6/22/800059173/news/federal-judge-halts-trump-administration-effort-to-subpoena-walz-in-immigration-enforcement-probe/</link>
     <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800059173/news/federal-judge-halts-trump-administration-effort-to-subpoena-walz-in-immigration-enforcement-probe/</guid>
     <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Actual shocker: Supreme Court isn’t the worst for once</title>
     <link>https://www.dailykos.com/stories/2026/6/22/800059096/courts/actual-shocker-supreme-court-isnt-the-worst-for-once/</link>
     <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800059096/courts/actual-shocker-supreme-court-isnt-the-worst-for-once/</guid>
     <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
-  </item>
-  <item>
-    <title>Outlook good</title>
-    <link>https://www.dailykos.com/stories/2026/6/22/800053944/cartoon/outlook-good/</link>
-    <guid isPermaLink="true">https://www.dailykos.com/stories/2026/6/22/800053944/cartoon/outlook-good/</guid>
-    <source url="https://www.dailykos.com/blogs/main.rss">Daily Kos</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>The true vandal of DC caught red-handed</title>
     <link>https://www.rawstory.com/reflecting-pool-2677077242/</link>
     <guid isPermaLink="true">https://www.rawstory.com/reflecting-pool-2677077242/</guid>
     <source url="https://www.rawstory.com/feed/">Raw Story</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Grim verdict as ex-GOP operative says US is on a &#x27;raft ride down the sewer river&#x27; of Trump</title>
     <link>https://www.rawstory.com/donald-trump-steve-schmidt-2677076956/</link>
     <guid isPermaLink="true">https://www.rawstory.com/donald-trump-steve-schmidt-2677076956/</guid>
     <source url="https://www.rawstory.com/feed/">Raw Story</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Firebrand who helped build MAGA claims movement poised to &#x27;collapse under its own weight&#x27;</title>
     <link>https://www.rawstory.com/maga-collapse/</link>
     <guid isPermaLink="true">https://www.rawstory.com/maga-collapse/</guid>
     <source url="https://www.rawstory.com/feed/">Raw Story</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>The one question no one seems to be asking Donald Trump</title>
     <link>https://www.rawstory.com/the-one-question-no-one-seems-to-be-asking-donald-trump/</link>
     <guid isPermaLink="true">https://www.rawstory.com/the-one-question-no-one-seems-to-be-asking-donald-trump/</guid>
     <source url="https://www.rawstory.com/feed/">Raw Story</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Renowned economist predicts Trump&#x27;s mistakes will impact U.S. credibility</title>
     <link>https://www.rawstory.com/paul-krugman-2677075349/</link>
     <guid isPermaLink="true">https://www.rawstory.com/paul-krugman-2677075349/</guid>
     <source url="https://www.rawstory.com/feed/">Raw Story</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Trump Obsesses Over Reflecting Pool Conspiracies As The Middle East Melts Down</title>
     <link>https://www.politicususa.com/p/trump-obsesses-over-reflecting-pool</link>
     <guid isPermaLink="true">https://www.politicususa.com/p/trump-obsesses-over-reflecting-pool</guid>
     <source url="https://www.politicususa.com/feed">Politicus USA</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Trump&#x27;s Iran Deal Implodes And Sinks JD Vance</title>
     <link>https://www.politicususa.com/p/trumps-iran-deal-implodes-and-sinks</link>
     <guid isPermaLink="true">https://www.politicususa.com/p/trumps-iran-deal-implodes-and-sinks</guid>
     <source url="https://www.politicususa.com/feed">Politicus USA</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Italian Prime Minister Humiliates Pathetic Trump</title>
     <link>https://www.politicususa.com/p/italian-prime-minister-humiliates</link>
     <guid isPermaLink="true">https://www.politicususa.com/p/italian-prime-minister-humiliates</guid>
     <source url="https://www.politicususa.com/feed">Politicus USA</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Obama Disgraces Trump While Opening His Presidential Center</title>
     <link>https://www.politicususa.com/p/obama-disgraces-trump-while-opening</link>
     <guid isPermaLink="true">https://www.politicususa.com/p/obama-disgraces-trump-while-opening</guid>
     <source url="https://www.politicususa.com/feed">Politicus USA</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>JD Vance Tried To Defend Trump&#x27;s Surrender To Iran And It Was A Disaster</title>
     <link>https://www.politicususa.com/p/jd-vance-tried-to-defend-trumps-surrender</link>
     <guid isPermaLink="true">https://www.politicususa.com/p/jd-vance-tried-to-defend-trumps-surrender</guid>
     <source url="https://www.politicususa.com/feed">Politicus USA</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>How Jeffrey Epstein Exploited Bill Gates&#x27; &#x27;Hellscape&#x27; Marriage</title>
     <link>https://www.thedailybeast.com/michael-wolffhow-jeffrey-epstein-exploited-bill-gates-and-melinda-french-gates-hellscape-marriage/</link>
     <guid isPermaLink="true">https://www.thedailybeast.com/michael-wolffhow-jeffrey-epstein-exploited-bill-gates-and-melinda-french-gates-hellscape-marriage/</guid>
     <source url="https://www.thedailybeast.com/arc/outboundfeeds/rss/">The Daily Beast</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>W. Kamau Bell Criticizes Nate Bargatze Over White House UFC Event</title>
     <link>https://www.thedailybeast.com/obsessed/w-kamau-bell-rips-nice-guy-nate-bargatze-for-partying-with-fascists/</link>
     <guid isPermaLink="true">https://www.thedailybeast.com/obsessed/w-kamau-bell-rips-nice-guy-nate-bargatze-for-partying-with-fascists/</guid>
     <source url="https://www.thedailybeast.com/arc/outboundfeeds/rss/">The Daily Beast</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Serena Williams&#x27; Comeback Ignites Debate Over Athletes Taking GLP-1s</title>
     <link>https://www.thedailybeast.com/serena-williams-comeback-ignites-debate-over-athletes-taking-glp-1s/</link>
     <guid isPermaLink="true">https://www.thedailybeast.com/serena-williams-comeback-ignites-debate-over-athletes-taking-glp-1s/</guid>
     <source url="https://www.thedailybeast.com/arc/outboundfeeds/rss/">The Daily Beast</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Will Arnett Shuts Down Shocking Question About Famous Ex-Wife Amy Poehler</title>
     <link>https://www.thedailybeast.com/obsessed/comedian-will-arnett-shuts-down-shocking-question-about-famous-ex-wife-amy-poehler/</link>
     <guid isPermaLink="true">https://www.thedailybeast.com/obsessed/comedian-will-arnett-shuts-down-shocking-question-about-famous-ex-wife-amy-poehler/</guid>
     <source url="https://www.thedailybeast.com/arc/outboundfeeds/rss/">The Daily Beast</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
   <item>
     <title>Trump’s Mall Cops Launch Bonkers Crackdown on Slime Crisis</title>
     <link>https://www.thedailybeast.com/trumps-mall-cops-launch-bonkers-crackdown-on-slime-crisis/</link>
     <guid isPermaLink="true">https://www.thedailybeast.com/trumps-mall-cops-launch-bonkers-crackdown-on-slime-crisis/</guid>
     <source url="https://www.thedailybeast.com/arc/outboundfeeds/rss/">The Daily Beast</source>
-    <pubDate>Mon, 22 Jun 2026 20:23:43 +0000</pubDate>
+    <pubDate>Mon, 22 Jun 2026 20:32:00 +0000</pubDate>
   </item>
 </channel>
 </rss>
