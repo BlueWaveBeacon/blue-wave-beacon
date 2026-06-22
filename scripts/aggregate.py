@@ -663,6 +663,7 @@ def build_rss(items: list[dict], now: datetime) -> str:
     <pubDate>{rfc822}</pubDate>
   </item>\n"""
     return f"""<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
 <rss version="2.0">
 <channel>
   <title>BLUE WAVE BEACON</title>
