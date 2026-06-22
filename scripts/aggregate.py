@@ -495,6 +495,12 @@ PAGE_TEMPLATE = """\
   <meta name="twitter:title" content="BLUE WAVE BEACON — Progressive News, Updated Daily" />
   <meta name="twitter:description" content="A Drudge-style aggregator for progressive and independent news, updated daily." />
   <meta name="twitter:image" content="https://bluewavebeacon.com/assets/logo.png" />
+  <script>
+    // When the page is restored from the browser's back/forward cache (e.g. tapping a
+    // story then hitting Back), force a fresh load so visitors never see a stale old
+    // edition of the homepage instead of today's update.
+    window.addEventListener("pageshow", function (e) {{ if (e.persisted) location.reload(); }});
+  </script>
 </head>
 <body>
 
@@ -639,14 +645,21 @@ if ('serviceWorker' in navigator) {{
 
 def build_rss(items: list[dict], now: datetime) -> str:
     rfc822 = now.strftime("%a, %d %b %Y %H:%M:%S +0000")
+    # Map each source name to its feed URL so <source> can carry the required url attribute.
+    src_urls = {s["name"]: s["url"] for s in SOURCES}
     item_xml = ""
     for item in items[:50]:
         title = html.escape(item["title"])
         link  = html.escape(item["link"])
+        src_name = html.escape(item["source"])
+        # RSS 2.0 requires <source> to have a url attribute; without it the feed is
+        # invalid and strict readers reject it. Fall back to the site if unknown.
+        src_url  = html.escape(src_urls.get(item["source"], "https://bluewavebeacon.com"))
         item_xml += f"""  <item>
     <title>{title}</title>
     <link>{link}</link>
-    <source>{html.escape(item['source'])}</source>
+    <guid isPermaLink="true">{link}</guid>
+    <source url="{src_url}">{src_name}</source>
     <pubDate>{rfc822}</pubDate>
   </item>\n"""
     return f"""<?xml version="1.0" encoding="UTF-8"?>
