@@ -34,10 +34,13 @@ SOURCES = [
     {"name": "The Guardian US", "url": "https://www.theguardian.com/us-news/rss",      "cat": "top"},
     {"name": "HuffPost",        "url": "https://www.huffpost.com/section/front-page/feed", "cat": "top"},
     {"name": "Vox",             "url": "https://www.vox.com/rss/index.xml",            "cat": "top"},
-    {"name": "NBC News",        "url": "https://feeds.nbcnews.com/nbcnews/public/news","cat": "top"},
-    # CNN has deprecated all its RSS feeds (they serve frozen 2023 content); kept here in
-    # case it ever revives — the MAX_AGE_DAYS freshness guard drops its stale entries.
-    {"name": "CNN",             "url": "http://rss.cnn.com/rss/cnn_topstories.rss",    "cat": "top"},
+    # NBC News removed: its feed mixes in Spanish-language "Noticias" items which
+    # surfaced as the (English) site's top story.
+    # CNN deprecated all first-party RSS (frozen 2023 content), so pull current CNN
+    # politics headlines via Google News' site-scoped feed instead.
+    {"name": "CNN",             "url": "https://news.google.com/rss/search?q=site:cnn.com/politics&hl=en-US&gl=US&ceid=US:en", "cat": "top"},
+    # MSNBC rebranded to MS NOW (ms.now); this is its working first-party feed.
+    {"name": "MS NOW",          "url": "https://www.ms.now/rss",                       "cat": "top"},
     {"name": "ABC News",        "url": "https://feeds.abcnews.com/abcnews/topstories", "cat": "top"},
     {"name": "CBS News",        "url": "https://www.cbsnews.com/latest/rss/main",      "cat": "top"},
     # Politics
@@ -76,6 +79,20 @@ MAX_PER_COLUMN = 18  # links per column
 MAX_AGE_DAYS = 14    # drop entries older than this (guards against zombie feeds like CNN's)
 BLUESKY_POST_COUNT = 6
 BLUESKY_TRENDING_COUNT = 12
+
+# Progressive YouTube channels — newest video from each is featured on the homepage.
+# IDs resolved from the channels' @handles; videos come from YouTube's public
+# per-channel feed (https://www.youtube.com/feeds/videos.xml?channel_id=...).
+YOUTUBE_CHANNELS = [
+    {"name": "MeidasTouch",         "id": "UCJgZJZZbnLFPr5GJdCuIwpA"},
+    {"name": "Brian Tyler Cohen",   "id": "UCQANb2YPwAtK-IQJrLaaUFw"},
+    {"name": "The Young Turks",     "id": "UC8Ap0a-VRZALdStTdipHGuA"},
+    {"name": "David Pakman Show",   "id": "UCvixJtaXuNdMPUGdOPcY8Ag"},
+    {"name": "Secular Talk",        "id": "UCldfgbzNILYZA4dmDt4Cd6A"},
+    {"name": "The Majority Report", "id": "UC-3jIAlnQmbbVMV6gR7K8aQ"},
+    {"name": "Glenn Kirschner",     "id": "UCrWmonkmTk5NbvmVnc7f70w"},
+    {"name": "More Perfect Union",  "id": "UCehBVAPy-bxmnbNARF-_tvA"},
+]
 
 COLUMN_TITLES = {
     "left":   "POLITICS & DEMOCRACY",
@@ -229,6 +246,8 @@ def fetch_feed(source: dict) -> list[dict]:
         if _entry_too_old(entry):
             continue  # skip stale entries within an otherwise-fresh feed
         title = clean(entry.get("title", ""))
+        # Google News feeds append " - <Outlet>" to titles; strip our own source suffix.
+        title = re.sub(r"\s+-\s+" + re.escape(source["name"]) + r"$", "", title, flags=re.I)
         link  = entry.get("link", "#")
         if title and link:
             items.append({"title": title, "link": link, "source": source["name"], "cat": source["cat"]})
@@ -368,6 +387,51 @@ def render_trend_tags(tags: list[str]) -> str:
     parts.append("</div>")
     return "\n".join(parts)
 
+# ── YOUTUBE ────────────────────────────────────────────────────────────────────
+
+def fetch_youtube() -> list[dict]:
+    """Newest video from each configured progressive channel, via YouTube's public
+    per-channel XML feed (no API key needed)."""
+    videos = []
+    for ch in YOUTUBE_CHANNELS:
+        try:
+            feed = _parse_feed(f"https://www.youtube.com/feeds/videos.xml?channel_id={ch['id']}")
+            if not feed or not feed.entries:
+                print(f"  [WARN] YouTube {ch['name']}: no entries", file=sys.stderr)
+                continue
+            e = feed.entries[0]
+            vid = e.get("yt_videoid", "")
+            videos.append({
+                "channel": ch["name"],
+                "title": clean(e.get("title", "")),
+                "url": e.get("link", "#"),
+                "thumb": f"https://i.ytimg.com/vi/{vid}/mqdefault.jpg" if vid else "",
+            })
+        except Exception as ex:
+            print(f"  [WARN] YouTube {ch['name']}: {ex}", file=sys.stderr)
+    return videos
+
+def render_youtube_section(videos: list[dict]) -> str:
+    if not videos:
+        return ""
+    cards = []
+    for v in videos:
+        thumb = f'<img class="yt-thumb" src="{html.escape(v["thumb"])}" alt="" loading="lazy" />' if v["thumb"] else ""
+        cards.append(f"""<a class="yt-card" href="{html.escape(v['url'])}" target="_blank" rel="noopener noreferrer">
+  {thumb}
+  <span class="yt-channel">▶ {html.escape(v['channel'])}</span>
+  <span class="yt-title">{html.escape(v['title'])}</span>
+</a>""")
+    cards_html = "\n".join(cards)
+    return f"""<section id="youtube-section">
+  <div class="section-header" style="background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:9px 16px;border-radius:4px 4px 0 0;">
+    📺 Progressive Voices on YouTube
+  </div>
+  <div id="yt-grid">
+    {cards_html}
+  </div>
+</section>"""
+
 # URL path segments that signal "soft"/lifestyle content we don't want as hard news.
 SOFT_URL_SEGMENTS = (
     "/lifestyle", "/wellness", "/well/", "/food", "/recipes", "/music", "/culture",
@@ -413,7 +477,7 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     #   2. Political outlets (TPM, Daily Kos, Raw Story, PoliticusUSA)
     #   3. Any remaining hard top item (e.g. Guardian hard news)
     #   4. Absolute fallback: anything
-    NETWORKS = {"NBC News", "CNN", "ABC News", "CBS News"}
+    NETWORKS = {"CNN", "MS NOW", "ABC News", "CBS News"}
     network_hard = [i for i in hard_top if i["source"] in NETWORKS]
     top_html = ""
     hero_pool = network_hard + pol_items + hard_top + top_items
@@ -584,6 +648,9 @@ PAGE_TEMPLATE = """\
     </div>
   </section>
 
+  <!-- YOUTUBE SECTION -->
+  {youtube_section}
+
   <!-- SOURCES -->
   <div id="sources-bar">
     <h3>Our Sources</h3>
@@ -695,6 +762,10 @@ def main():
     bsky_posts, bsky_tags = fetch_bluesky_trending()
     print(f"Bluesky posts: {len(bsky_posts)}, tags: {len(bsky_tags)}")
 
+    print("Fetching YouTube...")
+    yt_videos = fetch_youtube()
+    print(f"YouTube videos: {len(yt_videos)}")
+
     print("Building HTML...")
     top_html, left_col, center_col, right_col = build_columns(items)
 
@@ -717,6 +788,7 @@ def main():
         center_col=center_col,
         right_col=right_col,
         substack_section=substack_html,
+        youtube_section=render_youtube_section(yt_videos),
         bsky_posts=bsky_posts_html,
         trend_tags=trend_tags_html,
         source_pills=source_pills_html,

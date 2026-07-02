@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500&family=Roboto+Condensed:wght@400;700&display=swap');
 
 :root {
+  /* Declare native dark support so mobile browsers (Chrome auto-dark, Samsung
+     force-dark) don't re-darken our colors into unreadable mud at night. */
+  color-scheme: light dark;
   --navy: #0d2247;
   --blue: #1a56db;
   --blue-light: #3b82f6;
@@ -585,28 +588,95 @@ footer .footer-links { margin-bottom: 8px; display: flex; justify-content: cente
   .donate-grid { grid-template-columns: 1fr; }
 }
 
+/* ── YOUTUBE SECTION ── */
+#youtube-section { margin-bottom: 16px; }
+
+#yt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--gray-light);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 14px;
+}
+
+.yt-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: var(--off-white);
+  border: 1px solid var(--gray-light);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.yt-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+.yt-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+
+.yt-channel {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #b91c1c;
+  padding: 8px 10px 0;
+}
+
+.yt-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--navy);
+  padding: 4px 10px 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  #yt-grid { background: #1e293b; border-color: #3e4c63; }
+  .yt-card { background: #0f172a; border-color: #3e4c63; }
+  .yt-channel { color: #ff8a8a; }
+  .yt-title { color: #eef2f9; }
+}
+
+@media (max-width: 600px) {
+  #yt-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ── DARK MODE ── */
 @media (prefers-color-scheme: dark) {
-  body { background: #0f172a; color: #e2e8f0; }
-  .column, #bluesky-section, #sources-bar { background: #1e293b; border-color: #334155; }
-  .news-link { color: #93c5fd; }
-  .news-link:visited { color: #c4b5fd; }
+  body { background: #0f172a; color: #eef2f9; }
+  .column, #bluesky-section, #sources-bar { background: #1e293b; border-color: #3e4c63; }
+  .news-link { color: #b4d2ff; border-bottom-color: #3e4c63; }
+  .news-link:visited { color: #d5c6ff; }
   .news-link:hover { color: #ffffff; }
-  .news-link { border-bottom-color: #334155; }
-  .news-link.headline-big { color: #f1f5f9; }
-  .news-link.headline-big:visited { color: #cbd5e1; }
-  .news-link.headline-medium { color: #bfdbfe; }
-  .news-link.headline-medium:visited { color: #d8b4fe; }
-  .news-link .source { color: #94a3b8; }
-  #top-story { background: #1e293b; border-color: #3b82f6; }
-  #top-story h1 a { color: #e2e8f0; }
-  .donate-card { background: #1e293b; border-color: #334155; }
-  .donate-card h3 { color: #e2e8f0; }
-  .source-pill { background: #1e3a6e; }
+  .news-link.headline-big { color: #ffffff; }
+  .news-link.headline-big:visited { color: #e2e8f0; }
+  .news-link.headline-medium { color: #d3e3ff; }
+  .news-link.headline-medium:visited { color: #e4d3ff; }
+  .news-link .source { color: #aab8cc; }
+  #top-story { background: #1e293b; border-color: #60a5fa; }
+  #top-story h1 a { color: #ffffff; }
+  #top-story h1 a:visited { color: #ffffff; }
+  #top-story .top-label { color: #93c5fd; }
+  .section-header, .column h2, .column-title { color: #ffffff; }
+  .donate-card { background: #1e293b; border-color: #3e4c63; }
+  .donate-card h3 { color: #ffffff; }
+  .donate-card p, .about-content p, .about-content li { color: #d7dfeb; }
+  .about-content h2 { color: #ffffff; }
+  .source-pill { background: #274a8f; color: #dbeafe; }
   .bsky-post { background: #1e293b; }
-  #bluesky-trending { background: #1e3a6e; }
-  .bsky-post .bsky-text { color: #e2e8f0; }
-  #sources-bar h3 { color: #93c5fd; }
+  #bluesky-trending { background: #274a8f; }
+  .trend-tag { color: #cfe2ff; }
+  .bsky-post .bsky-text { color: #eef2f9; }
+  .bsky-post .bsky-author { color: #ffffff; }
+  .bsky-post .bsky-handle, .bsky-post .bsky-meta { color: #aab8cc; }
+  #sources-bar h3 { color: #b4d2ff; }
+  #last-updated, .top-bar, #site-tagline { color: #d7dfeb; }
 }
 
 /* ── SEARCH BAR ── */
