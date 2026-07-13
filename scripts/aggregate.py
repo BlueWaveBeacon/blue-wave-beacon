@@ -249,8 +249,15 @@ def fetch_feed(source: dict) -> list[dict]:
         # Google News feeds append " - <Outlet>" to titles; strip our own source suffix.
         title = re.sub(r"\s+-\s+" + re.escape(source["name"]) + r"$", "", title, flags=re.I)
         link  = entry.get("link", "#")
+        # Publish timestamp (epoch seconds, 0 if the feed gave us no usable date)
+        tm = entry.get("published_parsed") or entry.get("updated_parsed")
+        try:
+            ts = calendar.timegm(tm) if tm else 0
+        except Exception:
+            ts = 0
         if title and link:
-            items.append({"title": title, "link": link, "source": source["name"], "cat": source["cat"]})
+            items.append({"title": title, "link": link, "source": source["name"],
+                          "cat": source["cat"], "ts": ts})
     return items
 
 def fetch_all_feeds() -> list[dict]:
@@ -449,6 +456,8 @@ SOFT_TITLE_PATTERNS = (
     "world cup", "super bowl", "premier league", "nba finals", "stanley cup",
     "box office", "red carpet", "movie review", "film review", "toy story",
     "best shows", "what to watch", "recipe", "horoscope", "taylor swift tour",
+    "fifa", "red card", "wimbledon", "grand slam", "nfl", "mlb", "nhl",
+    "champions league", "world series", "playoff", "quarterfinal", "semifinal",
 )
 
 def is_soft(item: dict) -> bool:
@@ -470,19 +479,42 @@ def build_columns(items: list[dict]) -> tuple[str, str, str, str]:
     # Drop soft/lifestyle/sport/entertainment items from the top bucket entirely — this
     # section is hard news only. (Other categories keep their items.)
     hard_top = [i for i in top_items if not is_soft(i)]
-    top_items = hard_top
 
-    # Top story — prefer genuine breaking/hard news. Priority order:
-    #   1. Hard headlines from the wire/cable networks (CNN, MSNBC, ABC, CBS)
-    #   2. Political outlets (TPM, Daily Kos, Raw Story, PoliticusUSA)
-    #   3. Any remaining hard top item (e.g. Guardian hard news)
-    #   4. Absolute fallback: anything
+    # ── TOP STORY — always the NEWEST hard-news headline, so the lead is timely and
+    #    rotates through the day instead of getting stuck on a stale item. ────────────
     NETWORKS = {"CNN", "MS NOW", "ABC News", "CBS News"}
     network_hard = [i for i in hard_top if i["source"] in NETWORKS]
+
+    now_ts = calendar.timegm(datetime.now(timezone.utc).timetuple())
+    HERO_FRESH_SECS = 2 * 24 * 3600  # a lead older than ~2 days looks stale — avoid it
+
+    # Priority pool (networks first, then political outlets, then any hard headline),
+    # de-duplicated by link while preserving that priority order.
+    hero_priority, _seen = [], set()
+    for it in (network_hard + pol_items + hard_top):
+        if it["link"] in _seen:
+            continue
+        _seen.add(it["link"])
+        hero_priority.append(it)
+
+    # Prefer the most recent item published within the freshness window; otherwise fall
+    # back to the newest dated item; last resort, top of the priority list.
+    fresh = [i for i in hero_priority if i.get("ts", 0) and (now_ts - i["ts"]) <= HERO_FRESH_SECS]
+    dated = [i for i in hero_priority if i.get("ts", 0)]
+    if fresh:
+        hero = max(fresh, key=lambda i: i["ts"])
+    elif dated:
+        hero = max(dated, key=lambda i: i["ts"])
+    elif hero_priority:
+        hero = hero_priority[0]
+    else:
+        hero = None
+
+    # Sort the Top Stories column by recency so the whole section feels current.
+    top_items = sorted(hard_top, key=lambda i: i.get("ts", 0), reverse=True)
+
     top_html = ""
-    hero_pool = network_hard + pol_items + hard_top + top_items
-    if hero_pool:
-        hero = hero_pool[0]
+    if hero:
         hero_link = html.escape(hero['link'])
         hero_title_enc = quote(hero['title'])
         top_html = f"""<div id="top-story">
