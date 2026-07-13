@@ -440,24 +440,24 @@ def render_youtube_section(videos: list[dict]) -> str:
 </section>"""
 
 # URL path segments that signal "soft"/lifestyle content we don't want as hard news.
+# NOTE: sports are intentionally NOT filtered — a big sports event can legitimately be
+# the top story. We only screen out lifestyle/entertainment/culture fluff. The real
+# guard against a stale lead is the recency window in build_columns, not this list.
 SOFT_URL_SEGMENTS = (
     "/lifestyle", "/wellness", "/well/", "/food", "/recipes", "/music", "/culture",
-    "/books", "/games", "/game", "/sport", "/football", "/soccer", "/fashion",
+    "/books", "/games", "/game", "/fashion",
     "/travel", "/art-and-design", "/artanddesign", "/tv-and-radio", "/television",
     "/film", "/movies", "/stage", "/relationships", "/beauty", "/style", "/celebrity",
     "/entertainment", "/puzzles", "/crosswords", "/horoscope", "/global/", "/pets",
     "/lifeandstyle", "/audio", "/podcast", "/gallery", "/comics",
 )
 
-# Title markers for obvious sport/entertainment/lifestyle pieces that ride on hard-news
-# feeds with flat URLs (e.g. Vox's /future-perfect/...) the URL filter can't catch.
-# Kept tight to avoid false positives on real news.
+# Title markers for obvious entertainment/lifestyle pieces that ride on hard-news feeds
+# with flat URLs the URL filter can't catch. Kept tight to avoid false positives on real
+# news — and deliberately excludes sports (big games may lead).
 SOFT_TITLE_PATTERNS = (
-    "world cup", "super bowl", "premier league", "nba finals", "stanley cup",
     "box office", "red carpet", "movie review", "film review", "toy story",
     "best shows", "what to watch", "recipe", "horoscope", "taylor swift tour",
-    "fifa", "red card", "wimbledon", "grand slam", "nfl", "mlb", "nhl",
-    "champions league", "world series", "playoff", "quarterfinal", "semifinal",
 )
 
 def is_soft(item: dict) -> bool:
