@@ -773,6 +773,190 @@ def build_rss(items: list[dict], now: datetime) -> str:
 {item_xml}</channel>
 </rss>"""
 
+# ── CATEGORY PAGES ───────────────────────────────────────────────────────────
+# The Politics / Climate / Economy pages are generated from the SAME live feed pool
+# as the homepage (previously they were frozen static demo pages). An item lands on a
+# page if its source category matches OR its title contains a whole-word keyword.
+
+POLITICS_KW = (
+    "trump", "biden", "harris", "vance", "congress", "senate", "house", "gop",
+    "republican", "republicans", "democrat", "democrats", "democratic", "election",
+    "elections", "vote", "votes", "voting", "voter", "voters", "ballot", "campaign",
+    "white house", "supreme court", "scotus", "governor", "immigration", "ice",
+    "deportation", "doj", "justice department", "impeach", "impeachment", "filibuster",
+    "primary", "midterm", "midterms", "congressional", "senator", "lawmaker",
+    "lawmakers", "subpoena", "indict", "indicted", "indictment", "pardon", "fbi",
+)
+CLIMATE_KW = (
+    "climate", "environment", "environmental", "carbon", "emission", "emissions",
+    "warming", "fossil", "oil", "gas", "coal", "solar", "wind", "renewable",
+    "renewables", "epa", "pollution", "wildfire", "wildfires", "drought", "flood",
+    "flooding", "hurricane", "heat wave", "greenhouse", "ev", "evs", "electric vehicle",
+    "wildlife", "endangered", "clean energy", "sea level", "glacier", "deforestation",
+)
+ECONOMY_KW = (
+    "economy", "economic", "labor", "wage", "wages", "union", "unions", "worker",
+    "workers", "job", "jobs", "inflation", "tax", "taxes", "tariff", "tariffs",
+    "price", "prices", "cost", "costs", "market", "markets", "stock", "stocks",
+    "housing", "rent", "medicare", "medicaid", "strike", "layoff", "layoffs",
+    "unemployment", "wall street", "federal reserve", "interest rate", "minimum wage",
+    "gig", "pension", "recession", "paycheck", "cost of living",
+)
+
+def _title_matches(item: dict, kws) -> bool:
+    title = (item.get("title") or "").lower()
+    return any(re.search(r"\b" + re.escape(k) + r"\b", title) for k in kws)
+
+CATEGORY_PAGES = [
+    {"file": "politics.html", "label": "Politics & Democracy", "column": "POLITICS & DEMOCRACY",
+     "desc": "The latest hard news on Washington, elections, the courts, and democracy.",
+     "cats": ("politics",), "kws": POLITICS_KW},
+    {"file": "climate.html", "label": "Climate & Environment", "column": "CLIMATE & ENVIRONMENT",
+     "desc": "Energy, emissions, extreme weather, and the fight to protect the planet.",
+     "cats": ("climate",), "kws": CLIMATE_KW},
+    {"file": "economy.html", "label": "Economy & Labor", "column": "ECONOMY & LABOR",
+     "desc": "Wages, jobs, unions, prices, and working-class power.",
+     "cats": (), "kws": ECONOMY_KW},
+]
+
+def _category_nav(active_file: str) -> str:
+    entries = [("index.html", "All Stories"), ("politics.html", "Politics & Democracy"),
+               ("climate.html", "Climate & Environment"), ("economy.html", "Economy & Labor")]
+    parts = []
+    for href, label in entries:
+        cls = ' class="active"' if href == active_file else ''
+        parts.append(f'<a href="{href}"{cls}>{html.escape(label)}</a>')
+    return "\n    ".join(parts)
+
+def build_category_pages(items: list[dict], timestamp: str, year: int):
+    for cfg in CATEGORY_PAGES:
+        pool, seen = [], set()
+        for it in items:
+            if is_soft(it) or it["link"] in seen:
+                continue
+            if it["cat"] in cfg["cats"] or _title_matches(it, cfg["kws"]):
+                seen.add(it["link"])
+                pool.append(it)
+        pool.sort(key=lambda i: i.get("ts", 0), reverse=True)
+        pool = pool[:40]
+        if pool:
+            links = "".join(
+                render_link(it, "headline-big" if i == 0 else ("headline-medium" if i < 3 else ""))
+                for i, it in enumerate(pool)
+            )
+        else:
+            links = ('<p style="padding:12px;color:#9ca3af">No stories in this category right '
+                     'now — check back soon.</p>')
+        page = CATEGORY_TEMPLATE.format(
+            page_title=html.escape(cfg["label"]),
+            meta_desc=html.escape(cfg["desc"]),
+            canonical=cfg["file"],
+            category_nav=_category_nav(cfg["file"]),
+            column_title=html.escape(cfg["column"]),
+            links=links,
+            timestamp=timestamp,
+            year=year,
+        )
+        (ROOT / cfg["file"]).write_text(page, encoding="utf-8")
+        print(f"Written: {cfg['file']} ({len(pool)} items)")
+
+CATEGORY_TEMPLATE = """\
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BLUE WAVE BEACON — {meta_desc}" />
+  <title>{page_title} — BLUE WAVE BEACON</title>
+  <link rel="canonical" href="https://bluewavebeacon.com/{canonical}" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="alternate" type="application/rss+xml" title="BLUE WAVE BEACON RSS" href="feed.xml" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0d2247" />
+  <script>
+    window.addEventListener("pageshow", function (e) {{ if (e.persisted) location.reload(); }});
+  </script>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" id="site-title-link">
+    <img src="assets/logo.png" alt="Blue Wave Beacon logo" id="site-logo" />
+    <span id="site-title"><span>BLUE WAVE</span> BEACON</span>
+  </a>
+  <div id="site-tagline">Progressive News · Updated Daily</div>
+  <nav id="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donations.html">💙 Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS Feed</a>
+    <a href="archive.html">📅 Archive</a>
+    <a href="merch.html">🛍️ Merch</a>
+    <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  </nav>
+</header>
+
+<div id="follow-bar">
+  <span>Follow Us</span>
+  <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  <a href="https://instagram.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+</div>
+
+<div id="timestamp-bar">
+  Last updated: {timestamp} ET &nbsp;|&nbsp; 🌊 BLUE WAVE BEACON &nbsp;|&nbsp; {page_title}
+</div>
+
+<main id="main-wrapper">
+
+  <nav id="category-nav">
+    {category_nav}
+  </nav>
+
+  <div id="search-bar">
+    <input type="text" id="headline-search" placeholder="🔍 Search headlines..." />
+  </div>
+
+  <div id="columns" style="grid-template-columns: 1fr;">
+    <div class="column"><div class="column-title">{column_title}</div>
+    {links}
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="donations.html">Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS</a>
+    <a href="mailto:contact@bluewavebeacon.com">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="merch.html">Merch Store</a>
+    <a href="archive.html">Archive</a>
+  </div>
+  <div>&copy; {year} BLUE WAVE BEACON &mdash; Independent progressive journalism aggregator.</div>
+</footer>
+
+<script>
+document.getElementById('headline-search').addEventListener('input', function (e) {{
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.news-link').forEach(function (link) {{
+    const text = link.textContent.toLowerCase();
+    link.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
+  }});
+}});
+if ('serviceWorker' in navigator) {{
+  navigator.serviceWorker.register('sw.js').catch(function () {{}});
+}}
+</script>
+</body>
+</html>
+"""
+
 # ── MAIN ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -831,6 +1015,9 @@ def main():
     out_index = ROOT / "index.html"
     out_index.write_text(index_html, encoding="utf-8")
     print(f"Written: {out_index}")
+
+    # Category pages (Politics / Climate / Economy) — generated from the live pool.
+    build_category_pages(items, timestamp, year)
 
     out_rss = ROOT / "feed.xml"
     out_rss.write_text(build_rss(items, now), encoding="utf-8")
