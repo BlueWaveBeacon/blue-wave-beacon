@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Blue Wave Beacon — Climate &amp; Environment news, updated daily." />
+  <meta name="description" content="BLUE WAVE BEACON — Energy, emissions, extreme weather, and the fight to protect the planet." />
   <title>Climate &amp; Environment — BLUE WAVE BEACON</title>
+  <link rel="canonical" href="https://bluewavebeacon.com/climate.html" />
   <link rel="stylesheet" href="style.css" />
   <link rel="alternate" type="application/rss+xml" title="BLUE WAVE BEACON RSS" href="feed.xml" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0d2247" />
+  <script>
+    window.addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  </script>
 </head>
 <body>
 
@@ -26,6 +30,7 @@
     <a href="feed.xml">RSS Feed</a>
     <a href="archive.html">📅 Archive</a>
     <a href="merch.html">🛍️ Merch</a>
+    <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
   </nav>
 </header>
 
@@ -34,6 +39,10 @@
   <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
   <a href="https://instagram.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
   <a href="https://x.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+</div>
+
+<div id="timestamp-bar">
+  Last updated: July 28, 2026 — 02:15 PM ET &nbsp;|&nbsp; 🌊 BLUE WAVE BEACON &nbsp;|&nbsp; Climate &amp; Environment
 </div>
 
 <main id="main-wrapper">
@@ -50,45 +59,13 @@
   </div>
 
   <div id="columns" style="grid-template-columns: 1fr;">
-    <div class="column">
-      <div class="column-title">CLIMATE &amp; ENVIRONMENT</div>
+    <div class="column"><div class="column-title">CLIMATE &amp; ENVIRONMENT</div>
+    <a href="https://truthout.org/articles/dojs-environmental-enforcement-arm-has-been-captured-by-industry-critics-say/" target="_blank" rel="noopener noreferrer" class="news-link headline-big">DOJ’s Environmental Enforcement Arm Has Been Captured by Industry, Critics Say<span class="source">Truthout</span></a>
+<a href="https://grist.org/transportation/next-stop-for-californias-high-speed-rail-finding-private-investors/" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Next stop for California’s high-speed rail: Finding private investors<span class="source">Grist</span></a>
+<a href="https://grist.org/politics/climate-hushing-democrats-polling-primaries-voters/" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">‘Climate hushing’ has swept the Democratic Party. New polling suggests it’s a mistake.<span class="source">Grist</span></a>
+<a href="https://grist.org/energy/heres-how-offshore-wind-helped-new-england-beat-record-heat/" target="_blank" rel="noopener noreferrer" class="news-link">Here’s how offshore wind helped New England beat record heat<span class="source">Grist</span></a>
+<a href="https://grist.org/energy/in-michigan-the-price-of-energy-is-on-the-ballot-and-both-parties-know-it/" target="_blank" rel="noopener noreferrer" class="news-link">In Michigan, the price of energy is on the ballot and both parties know it<span class="source">Grist</span></a>
 
-      <a href="https://www.theguardian.com" target="_blank" rel="noopener noreferrer" class="news-link headline-big">
-        Supreme Court Rules in Favor of EPA Authority to Regulate Carbon Emissions
-        <span class="source">The Guardian US</span>
-      </a>
-      <a href="https://www.huffpost.com" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">
-        Biden Signs Executive Order Protecting Wetlands and Waterways Nationwide
-        <span class="source">HuffPost</span>
-      </a>
-      <a href="https://www.theguardian.com" target="_blank" rel="noopener noreferrer" class="news-link">
-        Global Leaders Agree to Phase Out Coal Power by 2035 at Climate Summit
-        <span class="source">The Guardian</span>
-      </a>
-      <a href="https://grist.org" target="_blank" rel="noopener noreferrer" class="news-link">
-        Solar Power Surpasses Coal in US Electricity Generation for First Time
-        <span class="source">Grist</span>
-      </a>
-      <a href="https://insideclimatenews.org" target="_blank" rel="noopener noreferrer" class="news-link">
-        Scientists Warn of Accelerating Ice Sheet Melt — 'Faster Than Models Predicted'
-        <span class="source">Inside Climate News</span>
-      </a>
-      <a href="https://grist.org" target="_blank" rel="noopener noreferrer" class="news-link">
-        EV Adoption Hits Tipping Point as Battery Prices Fall Below $75/kWh
-        <span class="source">Grist</span>
-      </a>
-      <a href="https://www.democracynow.org" target="_blank" rel="noopener noreferrer" class="news-link">
-        Indigenous Water Rights Victory in Landmark Tribal Sovereignty Case
-        <span class="source">Democracy Now</span>
-      </a>
-      <a href="https://theintercept.com" target="_blank" rel="noopener noreferrer" class="news-link">
-        Leaked Documents Reveal Oil Lobby's Secret Campaign to Delay Climate Legislation
-        <span class="source">The Intercept</span>
-      </a>
-      <a href="https://www.theguardian.com/us-news" target="_blank" rel="noopener noreferrer" class="news-link">
-        Senate Democrats Advance Sweeping Climate and Healthcare Package in Landmark Vote
-        <span class="source">The Guardian US</span>
-      </a>
     </div>
   </div>
 
@@ -117,6 +94,9 @@ document.getElementById('headline-search').addEventListener('input', function (e
     link.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
   });
 });
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+}
 </script>
 </body>
 </html>
