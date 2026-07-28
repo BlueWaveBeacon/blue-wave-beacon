@@ -620,8 +620,8 @@ PAGE_TEMPLATE = """\
 <div id="follow-bar">
   <span>Follow Us</span>
   <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
-  <a href="https://instagram.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
-  <a href="https://x.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
 </div>
 
 <div id="breaking-banner" style="display:none">
@@ -900,8 +900,8 @@ CATEGORY_TEMPLATE = """\
 <div id="follow-bar">
   <span>Follow Us</span>
   <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
-  <a href="https://instagram.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
-  <a href="https://x.com/BlueWaveBeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
 </div>
 
 <div id="timestamp-bar">
