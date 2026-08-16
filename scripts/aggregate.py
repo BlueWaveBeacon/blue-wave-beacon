@@ -255,8 +255,11 @@ def fetch_feed(source: dict) -> list[dict]:
             ts = calendar.timegm(tm) if tm else 0
         except Exception:
             ts = 0
-        if title and link:
-            items.append({"title": title, "link": link, "source": source["name"],
+        # Security: only accept normal web links. Feeds are untrusted input, so we drop
+        # anything that isn't http(s) — this blocks javascript:/data: links that could
+        # otherwise become clickable script-running hrefs on the page.
+        if title and link and link.strip().lower().startswith(("http://", "https://")):
+            items.append({"title": title, "link": link.strip(), "source": source["name"],
                           "cat": source["cat"], "ts": ts})
     return items
 
