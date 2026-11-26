@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BLUE WAVE BEACON — progressive news aggregator updated daily." />
+  <title>BLUE WAVE BEACON</title>
+  <link rel="canonical" href="https://bluewavebeacon.com/" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="alternate" type="application/rss+xml" title="BLUE WAVE BEACON RSS" href="feed.xml" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0d2247" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BLUE WAVE BEACON — Progressive News, Updated Daily" />
+  <meta property="og:description" content="A Drudge-style aggregator for progressive and independent news, updated daily." />
+  <meta property="og:url" content="https://bluewavebeacon.com/" />
+  <meta property="og:image" content="https://bluewavebeacon.com/assets/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="BLUE WAVE BEACON — Progressive News, Updated Daily" />
+  <meta name="twitter:description" content="A Drudge-style aggregator for progressive and independent news, updated daily." />
+  <meta name="twitter:image" content="https://bluewavebeacon.com/assets/logo.png" />
+  <script>
+    // When the page is restored from the browser's back/forward cache (e.g. tapping a
+    // story then hitting Back), force a fresh load so visitors never see a stale old
+    // edition of the homepage instead of today's update.
+    window.addEventListener("pageshow", function (e) { if (e.persisted) location.reload(); });
+  </script>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" id="site-title-link">
+    <img src="assets/logo.png" alt="Blue Wave Beacon logo" id="site-logo" />
+    <span id="site-title"><span>BLUE WAVE</span> BEACON</span>
+  </a>
+  <div id="site-tagline">Progressive News · Updated Daily</div>
+  <nav id="header-nav">
+    <a href="index.html">Home</a>
+    <a href="donations.html">💙 Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS Feed</a>
+    <a href="archive.html">📅 Archive</a>
+    <a href="merch.html">🛍️ Merch</a>
+    <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  </nav>
+</header>
+
+<div id="follow-bar">
+  <span>Follow Us</span>
+  <a href="https://bsky.app/profile/bluewavebeacon.com" target="_blank" rel="noopener noreferrer">🦋 Bluesky</a>
+  <a href="https://instagram.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://x.com/bluewavebeacon" target="_blank" rel="noopener noreferrer">𝕏 X</a>
+</div>
+
+<div id="breaking-banner" style="display:none">
+  <span class="label">BREAKING</span>
+  <span id="breaking-text"></span>
+</div>
+
+<div id="timestamp-bar">
+  Last updated: November 26, 2026 — 09:50 AM ET &nbsp;|&nbsp; 🌊 BLUE WAVE BEACON &nbsp;|&nbsp; Progressive news, curated daily
+</div>
+
+<main id="main-wrapper">
+
+  <!-- AD SLOT (replace with Google AdSense tag) -->
+  <div class="ad-slot">Advertisement — <a href="donations.html">Support us instead</a></div>
+
+  <!-- CATEGORY NAV -->
+  <nav id="category-nav">
+    <a href="index.html" class="active">All Stories</a>
+    <a href="politics.html">Politics &amp; Democracy</a>
+    <a href="climate.html">Climate &amp; Environment</a>
+    <a href="economy.html">Economy &amp; Labor</a>
+  </nav>
+
+  <!-- SEARCH BAR -->
+  <div id="search-bar">
+    <input type="text" id="headline-search" placeholder="🔍 Search headlines..." />
+  </div>
+
+  <!-- QUOTE OF THE DAY -->
+  <div id="quote-box">
+    <div class="quote-label">Quote of the Day</div>
+    <div class="quote-text">"Yes we can."</div>
+    <div class="quote-author">— Barack Obama</div>
+  </div>
+
+  <div id="top-story">
+  <div class="top-label">&#9733; Top Story</div>
+  <h1><a href="https://www.rawstory.com/trump-russia-ukraine-2678538352/" target="_blank" rel="noopener noreferrer">Trump&#x27;s mystery edit to NATO statement adds Ukraine to warning aimed at Russia</a></h1>
+  <div class="source-badge">Raw Story</div>
+  <div class="share-buttons" style="justify-content:center">
+    <a href="https://bsky.app/intent/compose?text=Trump%27s%20mystery%20edit%20to%20NATO%20statement%20adds%20Ukraine%20to%20warning%20aimed%20at%20Russia%20https://www.rawstory.com/trump-russia-ukraine-2678538352/" target="_blank" rel="noopener noreferrer" title="Share on Bluesky">🦋</a>
+    <a href="https://twitter.com/intent/tweet?text=Trump%27s%20mystery%20edit%20to%20NATO%20statement%20adds%20Ukraine%20to%20warning%20aimed%20at%20Russia&url=https://www.rawstory.com/trump-russia-ukraine-2678538352/" target="_blank" rel="noopener noreferrer" title="Share on X">𝕏</a>
+    <a href="https://www.threads.net/intent/post?text=Trump%27s%20mystery%20edit%20to%20NATO%20statement%20adds%20Ukraine%20to%20warning%20aimed%20at%20Russia%20https://www.rawstory.com/trump-russia-ukraine-2678538352/" target="_blank" rel="noopener noreferrer" title="Share on Threads">@</a>
+  </div>
+</div>
+
+  <div id="columns">
+    <div class="column"><div class="column-title">TOP STORIES</div>
+<a href="https://abcnews.com/Sports/wireStory/fifa-victim-cyberattack-accessing-personal-business-information-138465369" target="_blank" rel="noopener noreferrer" class="news-link headline-big">FIFA says it suffers cyberattack accessing &#x27;personal and business information&#x27;<span class="source">ABC News</span></a>
+<a href="https://www.cbsnews.com/live-updates/iran-war-us-military-ai-weapons-oil/" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Oil prices inch back up as Iran and the Houthis escalate threats<span class="source">CBS News</span></a>
+<a href="https://www.cbsnews.com/news/maps-thanksgiving-storms-disrupt-holiday-festivities-travel/" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Maps show where Thanksgiving storms could disrupt holiday<span class="source">CBS News</span></a>
+<a href="https://www.cbsnews.com/video/these-are-the-best-holiday-rom-coms-to-watch-according-to-an-expert/" target="_blank" rel="noopener noreferrer" class="news-link">These are the best holiday rom-coms to watch, according to an expert<span class="source">CBS News</span></a>
+<a href="https://www.theguardian.com/us-news/2026/nov/26/flatbush-brooklyn-nyc-building-collapse-response-homeless" target="_blank" rel="noopener noreferrer" class="news-link">‘These families will be essentially homeless’: Flatbush groups condemn response to building collapse<span class="source">The Guardian US</span></a>
+<a href="https://www.cbsnews.com/video/fedex-plane-slides-off-miami-runway-while-landing-during-stormy-weather-causes-ground-stop/" target="_blank" rel="noopener noreferrer" class="news-link">FedEx plane slides off Miami runway while landing during stormy weather, causes ground stop<span class="source">CBS News</span></a>
+<a href="https://abcnews.com/US/new-york-declares-emergency-thanksgiving-storm-threatens-east/story?id=138464273" target="_blank" rel="noopener noreferrer" class="news-link">New York declares emergency as Thanksgiving storm threatens East Coast<span class="source">ABC News</span></a>
+<a href="https://www.theguardian.com/us-news/2026/nov/26/freight-trains-blocking-streets-disrupting-life" target="_blank" rel="noopener noreferrer" class="news-link">Rescuers blocked from a fire. A child killed on the way to school. Miles-long trains are upending US lives<span class="source">The Guardian US</span></a>
+<a href="https://www.theguardian.com/us-news/2026/nov/26/louisiana-spacex-exxonmobil-land-deal-lawsuit" target="_blank" rel="noopener noreferrer" class="news-link">Suit alleges Louisiana land deal between SpaceX and ExxonMobil violates open meetings law<span class="source">The Guardian US</span></a>
+<a href="https://www.theguardian.com/us-news/2026/nov/26/brazil-china-react-to-new-trump-tariffs-threat" target="_blank" rel="noopener noreferrer" class="news-link">China reserves right to take ‘necessary measures’ after Trump’s new tariff proposals<span class="source">The Guardian US</span></a>
+<a href="https://www.vox.com/advice/509867/ethics-moving-red-state-blue-state" target="_blank" rel="noopener noreferrer" class="news-link">You’ve lived in a red state all your life. Is it wrong to pick up and move to a blue state now?<span class="source">Vox</span></a>
+<a href="https://abcnews.com/video/138464693/" target="_blank" rel="noopener noreferrer" class="news-link">WATCH:  Man uses balloon art to pay off $400K in student loans<span class="source">ABC News</span></a>
+<a href="https://www.theguardian.com/us-news/2026/nov/26/kilmar-abrego-garcia-spain-departure-trump" target="_blank" rel="noopener noreferrer" class="news-link">Kilmar Ábrego García leaves for Spain. But the Trump administration got what it wanted<span class="source">The Guardian US</span></a>
+<a href="https://www.vox.com/future-perfect/2023/11/22/23970874/thanksgiving-turkey-farming-jennie-o-hormel-white-house-pardon" target="_blank" rel="noopener noreferrer" class="news-link">How America broke the turkey<span class="source">Vox</span></a>
+<a href="https://www.ms.now/opinion/thanksgiving-food-insecurity-snap-cuts" target="_blank" rel="noopener noreferrer" class="news-link">Millions of Americans deserved better this Thanksgiving<span class="source">MS NOW</span></a>
+<a href="https://www.ms.now/opinion/trump-thanksgiving-brooke-rollins-christian-nationalism" target="_blank" rel="noopener noreferrer" class="news-link">Give me Thanksgiving, but hold the Christian nationalist mythology<span class="source">MS NOW</span></a>
+<a href="https://www.ms.now/news/thanksgiving-democrats-expensive-reminder-challenges-ahead" target="_blank" rel="noopener noreferrer" class="news-link">Thanksgiving brings Democrats an expensive reminder about the challenges ahead<span class="source">MS NOW</span></a>
+<a href="https://www.ms.now/news/thanksgiving-inflation-prices-turkey-food-pantries" target="_blank" rel="noopener noreferrer" class="news-link">‘Hunger doesn’t take a holiday’: High costs dampen Thanksgiving spirit<span class="source">MS NOW</span></a>
+</div>
+    <div class="column"><div class="column-title">POLITICS & DEMOCRACY</div>
+<a href="https://talkingpointsmemo.com/news/donald-trump-jr-hadrian-automation-pentagon-loan" target="_blank" rel="noopener noreferrer" class="news-link headline-big">A Startup Tied to Donald Trump Jr. Could Get a Historic $15 Billion Loan From the Pentagon<span class="source">Talking Points Memo</span></a>
+<a href="https://talkingpointsmemo.com/cafe/data-center-backlash-helped-democrats-2026-midterms" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Backlash Against Data Centers Helped Democrats Win the Midterms<span class="source">Talking Points Memo</span></a>
+<a href="https://talkingpointsmemo.com/news/peter-navarro-democratic-oversight-civil-war" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">WH Official Warns Dem Oversight Could Provoke ‘Civil War’<span class="source">Talking Points Memo</span></a>
+<a href="https://talkingpointsmemo.com/the-franchise/officials-drop-felony-charge-against-one-of-the-most-shocking-democratic-winners-of-the-cycle" target="_blank" rel="noopener noreferrer" class="news-link">Officials Drop Felony Charge Against One of the Most Shocking Democratic Winners of the Cycle<span class="source">Talking Points Memo</span></a>
+<a href="https://talkingpointsmemo.com/where-things-stand/howard-lutnicks-survival-as-commerce-secretary-is-key-to-understanding-trump-ii-corruption" target="_blank" rel="noopener noreferrer" class="news-link">Howard Lutnick’s Survival as Commerce Secretary Is Key to Understanding Trump II Corruption<span class="source">Talking Points Memo</span></a>
+<a href="https://www.dailykos.com/stories/2026/11/26/800131718/health/this-politics-sh-t-is-exhausting-so-start-a-self-care-routine/" target="_blank" rel="noopener noreferrer" class="news-link">This politics sh-t is exhausting. So start a self-care routine.<span class="source">Daily Kos</span></a>
+<a href="https://www.dailykos.com/stories/2026/11/26/800133518/cartoon/tom-the-dancing-bug-the-magas-are-panicking/" target="_blank" rel="noopener noreferrer" class="news-link">Tom the Dancing Bug: The MAGAs are panicking!<span class="source">Daily Kos</span></a>
+<a href="https://www.dailykos.com/stories/2026/11/25/800133052/elections/missouri-democrats-are-back-in-business/" target="_blank" rel="noopener noreferrer" class="news-link">Missouri Democrats are back in business<span class="source">Daily Kos</span></a>
+<a href="https://www.dailykos.com/stories/2026/11/25/800133315/cartoon/wanna-go-pick-up-some-chicks/" target="_blank" rel="noopener noreferrer" class="news-link">Wanna go pick up some chicks?<span class="source">Daily Kos</span></a>
+<a href="https://www.dailykos.com/stories/2026/11/25/800133956/media/fox-news-buries-nvidia-scandal/" target="_blank" rel="noopener noreferrer" class="news-link">Fox News buries Nvidia scandal with outrageous headlines<span class="source">Daily Kos</span></a>
+<a href="https://www.rawstory.com/donald-trump-anarchy/" target="_blank" rel="noopener noreferrer" class="news-link">Wall Street Journal declares &#x27;anarchy&#x27; after Trump&#x27;s tantrum wrecks DC landmark<span class="source">Raw Story</span></a>
+<a href="https://www.rawstory.com/floyd-mayweather-trump/" target="_blank" rel="noopener noreferrer" class="news-link">Boxing legend&#x27;s legal woes took a sudden turn after Trump memecoin cash arrived: report<span class="source">Raw Story</span></a>
+<a href="https://www.rawstory.com/vietnam-veterans-trump-arch/" target="_blank" rel="noopener noreferrer" class="news-link">Veterans group bails on Trump&#x27;s arch over &#x27;inaccurate information&#x27; fed to leader<span class="source">Raw Story</span></a>
+<a href="https://www.rawstory.com/trump-nvidia-market/" target="_blank" rel="noopener noreferrer" class="news-link">Trump suffers Thanksgiving morning meltdown after master plan&#x27;s &#x27;inevitable downturn&#x27;<span class="source">Raw Story</span></a>
+<a href="https://www.politicususa.com/p/democrats-are-loading-up-to-go-after" target="_blank" rel="noopener noreferrer" class="news-link">Democrats Are Loading Up To Go After Corrupt Trump Figures Like Jared Kushner<span class="source">Politicus USA</span></a>
+<a href="https://www.politicususa.com/p/a-lame-duck-tried-to-pardon-a-thanksgiving" target="_blank" rel="noopener noreferrer" class="news-link">A Lame Duck Tried To Pardon A Thanksgiving Turkey And It Was A Disaster<span class="source">Politicus USA</span></a>
+<a href="https://www.politicususa.com/p/todd-blanche-blows-up-trumps-nvidia" target="_blank" rel="noopener noreferrer" class="news-link">Todd Blanche Blows Up Trump’s Nvidia Cover Story<span class="source">Politicus USA</span></a>
+<a href="https://www.politicususa.com/p/jamie-raskin-promises-to-investigate" target="_blank" rel="noopener noreferrer" class="news-link">Jamie Raskin Promises To Investigate Jensen Huang And Nvidia<span class="source">Politicus USA</span></a>
+</div>
+    <div class="column"><div class="column-title">INVESTIGATION & ANALYSIS</div>
+<a href="https://www.propublica.org/article/fda-prescription-generic-medication-testing" target="_blank" rel="noopener noreferrer" class="news-link headline-big">FDA to Expand Prescription Drug Testing After ProPublica Revealed Safety Concerns<span class="source">ProPublica</span></a>
+<a href="https://www.propublica.org/article/smithsonian-white-house-plans-pingree" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Democrats Vow to Shield Smithsonian From Any Trump Overhaul<span class="source">ProPublica</span></a>
+<a href="https://www.propublica.org/article/oregon-housing-council-andrea-bell-joshua-crites" target="_blank" rel="noopener noreferrer" class="news-link headline-medium">Oregon Housing Leader Met With Officials Who Are Seeking Money for a Project Her Husband’s Employer Is Developing<span class="source">ProPublica</span></a>
+<a href="https://www.propublica.org/article/ectopic-pregnancy-data-analysis" target="_blank" rel="noopener noreferrer" class="news-link">An Alarming Spike in Ectopic Pregnancy Deaths Was Hiding in Plain Sight in a Federal Dataset<span class="source">ProPublica</span></a>
+<a href="https://www.propublica.org/article/donald-trump-jr-hadrian-pentagon-loan" target="_blank" rel="noopener noreferrer" class="news-link">A Startup Tied to Donald Trump Jr. Could Get a Historic $15 Billion Loan From the Pentagon<span class="source">ProPublica</span></a>
+<a href="https://theintercept.com/2026/11/25/senate-democrats-kirsten-gillibrand-dscc/" target="_blank" rel="noopener noreferrer" class="news-link">It’s Time to Ditch Kirsten Gillibrand<span class="source">The Intercept</span></a>
+<a href="https://theintercept.com/2026/11/25/trump-latin-america-intervention-influence/" target="_blank" rel="noopener noreferrer" class="news-link">Trump’s Imperialist Fantasy for Latin America Is Already Failing<span class="source">The Intercept</span></a>
+<a href="https://theintercept.com/2026/11/24/trump-truth-social-api-lawsuit-discovery/" target="_blank" rel="noopener noreferrer" class="news-link">Court Orders Trump Media to Hand Over Truth Social Records in The Intercept Lawsuit<span class="source">The Intercept</span></a>
+<a href="https://theintercept.com/2026/11/24/icc-sanctions-palestine-israel-human-rights/" target="_blank" rel="noopener noreferrer" class="news-link">Why a Case Against ICC Sanctions Is a Major Victory for Palestine Human Rights Work<span class="source">The Intercept</span></a>
+<a href="https://theintercept.com/2026/11/24/hakeem-jeffries-democrats-medicare-for-all/" target="_blank" rel="noopener noreferrer" class="news-link">Hakeem Jeffries Can Live With “Medicare for More”<span class="source">The Intercept</span></a>
+<a href="https://www.motherjones.com/environment/2026/11/cranberries-cranberry-bogs-solar-energy-agrivoltaics-farming/" target="_blank" rel="noopener noreferrer" class="news-link">Cranberries With a Side of Solar<span class="source">Mother Jones</span></a>
+<a href="https://www.motherjones.com/politics/2026/11/trump-interior-burgum-national-park-service-overhaul-congress-rush-election/" target="_blank" rel="noopener noreferrer" class="news-link">The Trump Administration is Racing to Overhaul the National Park Service<span class="source">Mother Jones</span></a>
+<a href="https://www.motherjones.com/politics/2026/11/lockheed-palantir-rtx-northrop-grumman-amazon-trump-ballroom-america-250-vanity-projects/" target="_blank" rel="noopener noreferrer" class="news-link">Defense Contractors Are Pouring Millions Into Donald Trump’s Vanity Projects<span class="source">Mother Jones</span></a>
+<a href="https://www.motherjones.com/environment/2026/11/turkey-human-attacks-aggressive-behavior-thanksgiving/" target="_blank" rel="noopener noreferrer" class="news-link">Your Not-So-Friendly Neighborhood Turkeys Will Have Their Revenge<span class="source">Mother Jones</span></a>
+<a href="https://www.motherjones.com/environment/2026/11/niagara-erie-radiation-evacuation-new-york-not-far-from-love-canal/" target="_blank" rel="noopener noreferrer" class="news-link">Not Far From Love Canal, Families Are Fleeing Their Radioactive Homes<span class="source">Mother Jones</span></a>
+<a href="https://www.thenation.com/article/politics/trumps-sinking-ship/" target="_blank" rel="noopener noreferrer" class="news-link">Trump’s Sinking Ship<span class="source">The Nation</span></a>
+<a href="https://www.thenation.com/article/politics/fdr-thanksgiving-capitalism-abdul-el-sayed/" target="_blank" rel="noopener noreferrer" class="news-link">FDR’s Thanksgiving Proclamations Made the Moral Case for Taming Capitalism<span class="source">The Nation</span></a>
+<a href="https://www.thenation.com/article/society/we-dont-need-to-join-the-political-establishments-exhausting-war-on-woke/" target="_blank" rel="noopener noreferrer" class="news-link">There’s Nothing “Crazy” About Wanting to Abolish Prisons<span class="source">The Nation</span></a>
+</div>
+  </div>
+
+  <section id="substack-section">
+  <div class="section-header" style="background:linear-gradient(135deg,#ff6719,#ff9a3d);color:white;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:9px 16px;border-radius:4px 4px 0 0;">
+    📰 From Our Substack Contributors
+  </div>
+  <div class="column" style="border-radius:0 0 4px 4px;">
+    <a href="https://heathercoxrichardson.substack.com/p/thanksgiving" target="_blank" rel="noopener noreferrer" class="news-link">Thanksgiving<span class="source">Heather Cox Richardson</span></a>
+
+<a href="https://heathercoxrichardson.substack.com/p/november-25-2026" target="_blank" rel="noopener noreferrer" class="news-link">November 25, 2026<span class="source">Heather Cox Richardson</span></a>
+
+<a href="https://heathercoxrichardson.substack.com/p/a-sordid-episode" target="_blank" rel="noopener noreferrer" class="news-link">A Sordid Episode<span class="source">Heather Cox Richardson</span></a>
+
+<a href="https://heathercoxrichardson.substack.com/p/november-24-2026" target="_blank" rel="noopener noreferrer" class="news-link">November 24, 2026<span class="source">Heather Cox Richardson</span></a>
+
+<a href="https://heathercoxrichardson.substack.com/p/politics-chat-november-24-2026-856" target="_blank" rel="noopener noreferrer" class="news-link">Politics Chat, November 24, 2026<span class="source">Heather Cox Richardson</span></a>
+
+<a href="https://robertreich.substack.com/p/happy-turkey-day" target="_blank" rel="noopener noreferrer" class="news-link">With Thanks<span class="source">Robert Reich</span></a>
+
+<a href="https://robertreich.substack.com/p/snls-woodstock-sketch" target="_blank" rel="noopener noreferrer" class="news-link">SNL’s Woodstock Sketch<span class="source">Robert Reich</span></a>
+
+<a href="https://robertreich.substack.com/p/office-hours-what-are-you-most-grateful" target="_blank" rel="noopener noreferrer" class="news-link">Office Hours: What Are You Most Grateful For?<span class="source">Robert Reich</span></a>
+
+<a href="https://robertreich.substack.com/p/a-lesson-in-how-not-to-be-misled" target="_blank" rel="noopener noreferrer" class="news-link">A Lesson In How Not To Be Misled<span class="source">Robert Reich</span></a>
+
+  </div>
+</section>
+
+  <!-- BLUESKY SECTION -->
+  <section id="bluesky-section">
+    <div class="section-header">
+      <span class="bsky-icon">🦋</span>
+      TRENDING ON BLUESKY — PROGRESSIVE VOICES
+    </div>
+    <div id="bluesky-trending"><span class="trend-label">Trending:</span>
+<a class="trend-tag" href="https://bsky.app/search?q=Thanksgiving%20Day%20celebrations" target="_blank" rel="noopener noreferrer">Thanksgiving Day celebrations</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Macy%27s%20parade%20turns%20100" target="_blank" rel="noopener noreferrer">Macy&#x27;s parade turns 100</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Aaron%20Rodgers%20reportedly%20out" target="_blank" rel="noopener noreferrer">Aaron Rodgers reportedly out</a>
+<a class="trend-tag" href="https://bsky.app/search?q=UK%20net%20migration%20falls%20to%2077%2C000" target="_blank" rel="noopener noreferrer">UK net migration falls to 77,000</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Nvidia%20chip%20exports%20to%20China" target="_blank" rel="noopener noreferrer">Nvidia chip exports to China</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Kushner%20praises%20Putin%27s%20restraint" target="_blank" rel="noopener noreferrer">Kushner praises Putin&#x27;s restraint</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Grand%20Theft%20Auto%20VI" target="_blank" rel="noopener noreferrer">Grand Theft Auto VI</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Thanksgiving%20storm%20threatens%20travel" target="_blank" rel="noopener noreferrer">Thanksgiving storm threatens travel</a>
+<a class="trend-tag" href="https://bsky.app/search?q=FCC%20approves%20SpaceX%20Starmind%20satellites" target="_blank" rel="noopener noreferrer">FCC approves SpaceX Starmind satellites</a>
+<a class="trend-tag" href="https://bsky.app/search?q=Duran%20Duran%27s%20Andy%20Taylor%20dies" target="_blank" rel="noopener noreferrer">Duran Duran&#x27;s Andy Taylor dies</a>
+<a class="trend-tag" href="https://bsky.app/search?q=FEMA%20hotline%20unanswered%20in%20Iowa" target="_blank" rel="noopener noreferrer">FEMA hotline unanswered in Iowa</a>
+<a class="trend-tag" href="https://bsky.app/search?q=ABC%20licenses%20FCC%20court%20case" target="_blank" rel="noopener noreferrer">ABC licenses FCC court case</a>
+</div>
+    <div id="bluesky-grid">
+      <div class="bsky-post">
+  <div class="bsky-author">Alexandria Ocasio-Cortez <span class="bsky-handle">@aoc.bsky.social</span></div>
+  <div class="bsky-text">Reading people. Body language. Knowing how to connect with people totally unlike you and with different backgrounds and beliefs. Defusing tense situations. Gaining trust. High endurance, pain tolerance, and work ethic. Reaction time. Prioritizing order of execution. Anticipating people’s needs. Tons</div>
+  <div class="bsky-meta">
+    <span>❤️ 13,811</span>
+    <span>🔁 1,623</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:p7gxyfr5vii5ntpwo7f6dhe2/post/3mfhmsfwths22" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+<div class="bsky-post">
+  <div class="bsky-author">Robert Reich <span class="bsky-handle">@rbreich.bsky.social</span></div>
+  <div class="bsky-text">What do these companies have in common:
+
+-Amazon
+-Walmart
+-FedEx
+-McDonald&#x27;s
+-Dollar General
+-DoorDash
+-Instacart
+
+They&#x27;re all highly profitable, give their CEOs lucrative salaries, and pay thousands of workers starvation wages — making them reliant on SNAP and Medicaid.</div>
+  <div class="bsky-meta">
+    <span>❤️ 3,350</span>
+    <span>🔁 1,523</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:4u3hwe3p7oy3hoy3amlw7rp2/post/3n367j6inz222" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+<div class="bsky-post">
+  <div class="bsky-author">Marc Elias <span class="bsky-handle">@marcelias.bsky.social</span></div>
+  <div class="bsky-text">Perhaps Democracy Docket should host a DNC candidate debate.🗳️⚖️💪</div>
+  <div class="bsky-meta">
+    <span>❤️ 2,584</span>
+    <span>🔁 388</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:pjiafkey2cokiupsxpswqlk7/post/3n33xjabgx22k" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+<div class="bsky-post">
+  <div class="bsky-author">George Conway ⚖️🇺🇸 <span class="bsky-handle">@gtconway.bsky.social</span></div>
+  <div class="bsky-text">I was just thinking this morning about how much money I could have made (and not spent!) starting in 2017 had I been even one-quarter as corrupt as they are.
+
+Oh, well, at least I won’t burn in Hell.</div>
+  <div class="bsky-meta">
+    <span>❤️ 2,183</span>
+    <span>🔁 161</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:4lx6nur5wstwoc4wtgj56kyu/post/3n35irdtw722i" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+<div class="bsky-post">
+  <div class="bsky-author">ProPublica <span class="bsky-handle">@propublica.org</span></div>
+  <div class="bsky-text">President Trump has moved to dismantle the VA in his second term, driving out medical providers and pushing veterans toward private care.  
+
+Officials deny vets’ care is being hurt, but the damage has cut like a scythe at one New Jersey hospital.</div>
+  <div class="bsky-meta">
+    <span>❤️ 1,746</span>
+    <span>🔁 1,084</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:k4jt6heuiamymgi46yeuxtpt/post/3n36r4ejrng2f" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+<div class="bsky-post">
+  <div class="bsky-author">emptywheel <span class="bsky-handle">@emptywheel.bsky.social</span></div>
+  <div class="bsky-text">More Nvidia selling to China scandal.
+
+www.cbsnews.com/news/nvidia-...</div>
+  <div class="bsky-meta">
+    <span>❤️ 1,074</span>
+    <span>🔁 427</span>
+    <a class="bsky-link" href="https://bsky.app/profile/did:plc:bbp2b224lro3bfnzcqwwnkfo/post/3n36e7qhfzc27" target="_blank" rel="noopener noreferrer">View on Bluesky →</a>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE SECTION -->
+  <section id="youtube-section">
+  <div class="section-header" style="background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:9px 16px;border-radius:4px 4px 0 0;">
+    📺 Progressive Voices on YouTube
+  </div>
+  <div id="yt-grid">
+    <a class="yt-card" href="https://www.youtube.com/watch?v=oOciKcVfgFE" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/oOciKcVfgFE/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ MeidasTouch</span>
+  <span class="yt-title">AG Blanche SCREWS UP Epstein Files Case by Sending in Deficient “Administrative Record” Filing?!?</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/watch?v=vDcz-TlffHE" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/vDcz-TlffHE/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ Brian Tyler Cohen</span>
+  <span class="yt-title">Vance issues INSANE claim about Iowa bomb detonation | Another Day</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/watch?v=LP2kdSK6M-Q" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/LP2kdSK6M-Q/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ The Young Turks</span>
+  <span class="yt-title">TYT Live Live Stream</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/shorts/CHJwFMqjxhg" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/CHJwFMqjxhg/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ David Pakman Show</span>
+  <span class="yt-title">Everything we&#x27;ve built here is possible because of you. #shorts</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/watch?v=Z3UEvFqEXxs" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/Z3UEvFqEXxs/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ Secular Talk</span>
+  <span class="yt-title">‘CODE RED’: Experts FREAK As Super-Intelligent AI God Is Here | The Kyle Kulinski Show</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/shorts/3THyz5QbDaE" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/3THyz5QbDaE/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ The Majority Report</span>
+  <span class="yt-title">Why do they stand like this?!</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/watch?v=Gxk_LyhwoUg" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/Gxk_LyhwoUg/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ Glenn Kirschner</span>
+  <span class="yt-title">Trump&#x27;s DOJ Is Circling the Drain!</span>
+</a>
+<a class="yt-card" href="https://www.youtube.com/shorts/3iSKQWwbOtA" target="_blank" rel="noopener noreferrer">
+  <img class="yt-thumb" src="https://i.ytimg.com/vi/3iSKQWwbOtA/mqdefault.jpg" alt="" loading="lazy" />
+  <span class="yt-channel">▶ More Perfect Union</span>
+  <span class="yt-title">We found the hidden reason for ridiculous airport food prices</span>
+</a>
+  </div>
+</section>
+
+  <!-- SOURCES -->
+  <div id="sources-bar">
+    <h3>Our Sources</h3>
+    <div class="sources-list">
+      <a class="source-pill" href="https://www.theguardian.com/us-news/rss" target="_blank" rel="noopener noreferrer">The Guardian US</a>
+<a class="source-pill" href="https://www.huffpost.com/section/front-page/feed" target="_blank" rel="noopener noreferrer">HuffPost</a>
+<a class="source-pill" href="https://www.vox.com/rss/index.xml" target="_blank" rel="noopener noreferrer">Vox</a>
+<a class="source-pill" href="https://news.google.com/rss/search?q=site:cnn.com/politics&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" target="_blank" rel="noopener noreferrer">CNN</a>
+<a class="source-pill" href="https://www.ms.now/rss" target="_blank" rel="noopener noreferrer">MS NOW</a>
+<a class="source-pill" href="https://feeds.abcnews.com/abcnews/topstories" target="_blank" rel="noopener noreferrer">ABC News</a>
+<a class="source-pill" href="https://www.cbsnews.com/latest/rss/main" target="_blank" rel="noopener noreferrer">CBS News</a>
+<a class="source-pill" href="https://talkingpointsmemo.com/feed" target="_blank" rel="noopener noreferrer">Talking Points Memo</a>
+<a class="source-pill" href="https://www.dailykos.com/blogs/main.rss" target="_blank" rel="noopener noreferrer">Daily Kos</a>
+<a class="source-pill" href="https://www.rawstory.com/feed/" target="_blank" rel="noopener noreferrer">Raw Story</a>
+<a class="source-pill" href="https://www.politicususa.com/feed" target="_blank" rel="noopener noreferrer">Politicus USA</a>
+<a class="source-pill" href="https://www.thedailybeast.com/arc/outboundfeeds/rss/" target="_blank" rel="noopener noreferrer">The Daily Beast</a>
+<a class="source-pill" href="https://www.propublica.org/feeds/propublica/main" target="_blank" rel="noopener noreferrer">ProPublica</a>
+<a class="source-pill" href="https://theintercept.com/feed/?lang=en" target="_blank" rel="noopener noreferrer">The Intercept</a>
+<a class="source-pill" href="https://www.motherjones.com/feed/" target="_blank" rel="noopener noreferrer">Mother Jones</a>
+<a class="source-pill" href="https://www.thenation.com/feed/?post_type=article" target="_blank" rel="noopener noreferrer">The Nation</a>
+<a class="source-pill" href="https://slate.com/feeds/all.rss" target="_blank" rel="noopener noreferrer">Slate</a>
+<a class="source-pill" href="https://www.salon.com/feed/" target="_blank" rel="noopener noreferrer">Salon</a>
+<a class="source-pill" href="https://newrepublic.com/rss.xml" target="_blank" rel="noopener noreferrer">The New Republic</a>
+<a class="source-pill" href="https://jacobin.com/feed" target="_blank" rel="noopener noreferrer">Jacobin</a>
+<a class="source-pill" href="https://www.theatlantic.com/feed/all/" target="_blank" rel="noopener noreferrer">The Atlantic</a>
+<a class="source-pill" href="https://www.commondreams.org/rss.xml" target="_blank" rel="noopener noreferrer">Common Dreams</a>
+<a class="source-pill" href="https://www.alternet.org/feeds/feed.rss" target="_blank" rel="noopener noreferrer">AlterNet</a>
+<a class="source-pill" href="https://truthout.org/feed/" target="_blank" rel="noopener noreferrer">Truthout</a>
+<a class="source-pill" href="https://www.democracynow.org/democracynow.rss" target="_blank" rel="noopener noreferrer">Democracy Now</a>
+<a class="source-pill" href="https://insideclimatenews.org/feed/" target="_blank" rel="noopener noreferrer">Inside Climate News</a>
+<a class="source-pill" href="https://grist.org/feed/" target="_blank" rel="noopener noreferrer">Grist</a>
+    </div>
+  </div>
+
+  <!-- AD SLOT BOTTOM -->
+  <div class="ad-slot">Advertisement</div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="donations.html">Donate</a>
+    <a href="about.html">About</a>
+    <a href="feed.xml">RSS</a>
+    <a href="mailto:contact@bluewavebeacon.com">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="merch.html">Merch Store</a>
+    <a href="archive.html">Archive</a>
+  </div>
+  <div>
+    &copy; 2026 BLUE WAVE BEACON &mdash; Independent progressive journalism aggregator.<br/>
+    All linked articles belong to their respective publishers.
+  </div>
+</footer>
+
+<script>
+// Show breaking banner if a ?breaking= param is set
+const params = new URLSearchParams(location.search);
+if (params.get('breaking')) {
+  document.getElementById('breaking-banner').style.display = 'block';
+  document.getElementById('breaking-text').textContent = decodeURIComponent(params.get('breaking'));
+}
+
+// Headline search
+document.getElementById('headline-search').addEventListener('input', function (e) {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.news-link').forEach(function (link) {
+    const text = link.textContent.toLowerCase();
+    link.classList.toggle('search-hidden', q.length > 0 && !text.includes(q));
+  });
+});
+
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+}
+</script>
+</body>
+</html>
